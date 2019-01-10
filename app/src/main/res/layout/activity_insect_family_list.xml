@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".InsectFamilyList">
+
+    <Button
+        android:id="@+id/button32"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:background="#86e2e9"
+        android:text="Insect Family List"
+        android:textSize="25dp"
+        android:textColor="#ffff"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/button34"
+        android:layout_width="383dp"
+        android:layout_height="61dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:background="#fdf6f6"
+        android:text="Ants"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="130dp"
+        android:background="#f2f1f1" />
+
+    <Button
+        android:id="@+id/button36"
+        android:layout_width="383dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/view2"
+        android:background="#fdf6f6"
+        android:text="Bees"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="383dp"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="194dp"
+        android:background="#f2f1f1" />
+
+    <Button
+        android:id="@+id/button37"
+        android:layout_width="383dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/view3"
+        android:background="#fdf6f6"
+        android:text="Wasps"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="258dp"
+        android:background="#f2f1f1" />
+
+    <Button
+        android:id="@+id/button38"
+        android:layout_width="383dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/view4"
+        android:background="#fdf6f6"
+        android:text="Moths"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="242dp"
+        android:background="#f2f1f1" />
+
+    <Button
+        android:id="@+id/button42"
+        android:layout_width="383dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/view5"
+        android:layout_marginTop="-243dp"
+        android:background="#fdf6f6"
+        android:text="Cockroaches"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="384dp"
+        android:background="#f2f1f1" />
+
+</RelativeLayout>
+</ScrollView>

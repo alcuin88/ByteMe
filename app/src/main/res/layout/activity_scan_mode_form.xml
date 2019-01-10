@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluebackground"
+    tools:context=".ScanModeForm">
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="209dp"
+        android:layout_height="288dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="146dp"
+        android:background="@drawable/dashboard" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="283dp"
+        android:layout_height="227dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="114dp"
+        app:srcCompat="@drawable/bee" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="177dp"
+        android:layout_height="34dp"
+        android:layout_alignBottom="@+id/imageView13"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="103dp"
+        android:layout_marginLeft="103dp"
+        android:layout_marginBottom="-13dp"
+        android:background="@drawable/signinroundbutton"
+        android:text="By Bite"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#ffff" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="177dp"
+        android:layout_height="34dp"
+        android:layout_alignStart="@+id/button18"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="165dp"
+        android:background="@drawable/signinroundbutton"
+        android:text="By Insect"
+        android:textColor="#ffff"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="125dp"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="129dp"
+        android:layout_marginBottom="65dp"
+        android:background="@drawable/submit"
+        android:text="Back"
+        android:textColor="#ffff"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button23"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#31d3e2"
+        android:text="Scan Mode"
+        android:textSize="25dp"
+        android:textColor="#ffff"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
