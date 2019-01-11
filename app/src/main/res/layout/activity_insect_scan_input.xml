@@ -11,27 +11,27 @@
         android:id="@+id/button27"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="#86e2e9"  />
+        android:background="#86e2e9"
+        android:layout_alignParentLeft="true" />
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="336dp"
-        android:layout_height="213dp"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
         app:srcCompat="@drawable/honeybee" />
 
     <Button
-        android:id="@+id/button28"
+        android:id="@+id/scanInsectButton"
         android:layout_width="141dp"
         android:layout_height="56dp"
-        android:layout_alignStart="@+id/imageView15"
+        android:layout_alignLeft="@+id/imageView15"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="193dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginBottom="231dp"
         android:background="#1b9af7"
         android:text="Scan Insect"
         android:textColor="#ffff"
@@ -42,10 +42,10 @@
         android:id="@+id/button29"
         android:layout_width="141dp"
         android:layout_height="56dp"
-        android:layout_alignTop="@+id/button28"
-        android:layout_alignEnd="@+id/imageView15"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="187dp"
+        android:layout_alignTop="@+id/scanInsectButton"
+        android:layout_alignRight="@+id/imageView15"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="107dp"
         android:background="#1b9af7"
         android:text="Upload Image"
         android:textColor="#ffff"
@@ -56,9 +56,11 @@
         android:id="@+id/imageView21"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        app:srcCompat="@drawable/medicalbackground" />
+        app:srcCompat="@drawable/medicalbackground"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp" />
+
+
 
 </RelativeLayout>
