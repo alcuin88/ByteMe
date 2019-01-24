@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,232 +7,90 @@
     android:background="@drawable/bluebackground"
     tools:context=".Dashboard">
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginLeft="73dp"
-        android:layout_marginTop="49dp"
-        android:background="@drawable/dashboard" />
-
-    <ImageView
-        android:id="@+id/scanImageView"
-        android:layout_width="86dp"
-        android:layout_height="121dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="74dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/bee" />
-
-    <Button
-        android:id="@+id/scanButton"
-        android:layout_width="71dp"
-        android:layout_height="29dp"
-        android:layout_alignBottom="@+id/button5"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginLeft="82dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="Scan"
-        android:textColor="#ffff" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginRight="65dp"
-        android:background="@drawable/dashboard" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="77dp"
-        android:layout_height="83dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginRight="69dp"
-        app:srcCompat="@drawable/honeybee" />
-
-    <Button
-        android:id="@+id/listButton"
-        android:layout_width="71dp"
-        android:layout_height="29dp"
-        android:layout_alignStart="@+id/imageView8"
-        android:layout_alignLeft="@+id/imageView8"
-        android:layout_alignTop="@+id/scanButton"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="-1dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="List"
-        android:textColor="#ffff" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignStart="@+id/button5"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="180dp"
-        android:background="@drawable/dashboard" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="71dp"
-        android:layout_height="65dp"
-        android:layout_alignStart="@+id/scanButton"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="241dp"
-        app:srcCompat="@drawable/pestcontroler"
-        android:layout_alignLeft="@+id/scanButton"
-        android:layout_marginLeft="3dp" />
-
-    <Button
-        android:id="@+id/pestButton"
-        android:layout_width="71dp"
-        android:layout_height="29dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginLeft="83dp"
-        android:layout_marginTop="273dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="Pest Control Services"
-        android:textColor="#ffff"
-        android:textSize="10dp" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignBottom="@+id/scanImageView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="228dp"
-        android:layout_marginLeft="228dp"
-        android:layout_marginBottom="-127dp"
-        android:background="@drawable/dashboard" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="63dp"
-        android:layout_height="64dp"
-        android:layout_alignTop="@+id/imageView9"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-7dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginRight="79dp"
-        app:srcCompat="@drawable/profile" />
-
-    <Button
-        android:id="@+id/profileButton"
-        android:layout_width="68dp"
-        android:layout_height="28dp"
-        android:layout_alignStart="@+id/imageView10"
-        android:layout_alignLeft="@+id/imageView10"
-        android:layout_alignTop="@+id/pestButton"
-        android:layout_alignBottom="@+id/imageView10"
-        android:layout_marginStart="-5dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginTop="-11dp"
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="122dp"
+        android:layout_height="162dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="9dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="Profile"
-        android:textColor="#ffff" />
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/Scan" />
 
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignStart="@+id/button5"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="62dp"
-        android:background="@drawable/dashboard"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_marginLeft="1dp" />
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="123dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/List" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="62dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/scanImageView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="233dp"
-        android:layout_marginBottom="-449dp"
-        app:srcCompat="@drawable/info"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="233dp" />
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="123dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:srcCompat="@drawable/PestControlServices" />
 
-    <Button
-        android:id="@+id/aboutButton"
-        android:layout_width="71dp"
-        android:layout_height="29dp"
-        android:layout_alignEnd="@+id/scanButton"
-        android:layout_alignRight="@+id/scanButton"
-        android:layout_alignBottom="@+id/button13"
-        android:layout_marginEnd="-1dp"
-        android:layout_marginRight="-1dp"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="About"
-        android:textColor="#ffff" />
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="121dp"
+        android:layout_height="159dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:srcCompat="@drawable/Profile" />
 
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="90dp"
-        android:layout_height="124dp"
-        android:layout_alignStart="@+id/button11"
-        android:layout_alignTop="@+id/button13"
-        android:background="@drawable/dashboard"
-        android:layout_alignLeft="@+id/button11" />
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="122dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="7dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/About" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="74dp"
-        android:layout_marginRight="74dp"
-        android:layout_marginBottom="112dp"
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="121dp"
+        android:layout_height="163dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginBottom="11dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
         app:srcCompat="@drawable/settings" />
 
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="71dp"
-        android:layout_height="29dp"
-        android:layout_alignStart="@+id/imageView10"
-        android:layout_alignLeft="@+id/imageView10"
-        android:layout_alignBottom="@+id/button13"
-        android:layout_marginStart="-3dp"
-        android:layout_marginLeft="-3dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="Settings"
-        android:textColor="#ffff" />
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
