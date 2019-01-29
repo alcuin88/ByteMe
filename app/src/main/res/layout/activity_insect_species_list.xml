@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:background="#FFFFFF">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,128 +15,114 @@
     tools:context=".InsectSpeciesList">
 
     <Button
-        android:id="@+id/button32"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="#86e2e9"
-        android:text="Ants"
-        android:textColor="#ffff"
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
-    <Button
         android:id="@+id/button34"
         android:layout_width="383dp"
         android:layout_height="61dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:background="#fdf6f6"
         android:text="Black House Ant"
         android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/button36"
         android:layout_width="383dp"
         android:layout_height="61dp"
         android:layout_below="@+id/view2"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:background="#fdf6f6"
         android:text="Fire Ant"
         android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="383dp"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="194dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button34" />
 
     <Button
         android:id="@+id/button37"
         android:layout_width="383dp"
         android:layout_height="61dp"
         android:layout_below="@+id/view3"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:background="#fdf6f6"
         android:text="Ghost Ant"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="258dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button36" />
 
     <Button
         android:id="@+id/button38"
         android:layout_width="383dp"
         android:layout_height="61dp"
         android:layout_below="@+id/view4"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:background="#fdf6f6"
         android:text="Odorous House Ant"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="242dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button37" />
 
     <Button
         android:id="@+id/button42"
         android:layout_width="383dp"
         android:layout_height="61dp"
         android:layout_below="@+id/view5"
-        android:layout_marginTop="-243dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="150dp"
         android:background="#fdf6f6"
         android:text="Pharaoh's Ant"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view6"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="384dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button38" />
 
     <Button
         android:id="@+id/button47"
-        android:layout_width="28dp"
-        android:layout_height="46dp"
+        android:layout_width="26dp"
+        android:layout_height="33dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:text=">"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        tools:layout_editor_absoluteY="10dp" />
 
-</RelativeLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="388dp"
+        android:layout_height="56dp"
+        android:background="#86e2e9"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="ANTS"
+        android:textColor="#ffff"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button34"
+        tools:layout_editor_absoluteX="159dp" />
+
+</android.support.constraint.ConstraintLayout>
 </ScrollView>

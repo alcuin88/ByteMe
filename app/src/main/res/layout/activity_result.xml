@@ -7,19 +7,6 @@
     android:background="#ffff"
     tools:context=".Result">
 
-    <Button
-        android:id="@+id/button31"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:background="#86e2e9"
-        android:text="Top 5 Results"
-        android:textColor="#ffff"
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -45,21 +32,12 @@
         android:text="90% Accuracy"
         android:textColor="#000000"/>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/button31"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="131dp"
-        android:background="#f2f1f1" />
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentTop="true"
         android:layout_marginTop="154dp"
         android:text="Bee"
@@ -70,27 +48,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
         android:layout_alignBottom="@+id/textView9"
         android:text="80% Accuracy"
         android:textColor="#000000"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/button31"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="190dp"
-        android:background="#f2f1f1" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="210dp"
         android:text="Mosquito"
         android:textColor="#000000"/>
@@ -100,27 +71,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
         android:layout_alignBottom="@+id/textView11"
         android:text="70% Accuracy"
         android:textColor="#000000"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/button31"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="245dp"
-        android:background="#f2f1f1" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="265dp"
         android:text="Ant"
         android:textColor="#000000"/>
@@ -130,59 +94,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
         android:layout_alignBottom="@+id/textView13"
         android:text="60% Accuracy"
         android:textColor="#000000"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/button31"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="299dp"
-        android:background="#f2f1f1" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="229dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginBottom="177dp"
         android:text="Mites"
-        android:textColor="#000000"/>
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
         android:layout_alignBottom="@+id/textView15"
         android:text="50% Accuracy"
         android:textColor="#000000"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/button31"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="355dp"
-        android:background="#f2f1f1" />
 
     <Button
         android:id="@+id/button48"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="3dp"
         android:background="@android:color/transparent"
         android:text=">"
         android:textSize="15dp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#86e2e9"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_toStartOf="@+id/textView8"
+        android:layout_toLeftOf="@+id/textView8"
+        android:text="Top 5 Results"
+        android:textColor="#ffff"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

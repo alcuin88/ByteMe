@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,14 @@
         android:layout_height="165dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginLeft="103dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginRight="103dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/honeybee" />
 
     <TextView
@@ -22,49 +29,47 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button33"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="171dp"
+        android:layout_marginLeft="171dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginRight="170dp"
         android:text="Bee"
         android:textColor="#000000"
         android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
 
     <Button
         android:id="@+id/button33"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="204dp"
+        android:layout_marginTop="50dp"
         android:background="#f9f1f1"
         android:text="Lifecycle"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="301dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/button43"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_below="@+id/button33"
-        android:layout_marginTop="-204dp"
         android:background="#f9f1f1"
         android:text="Habits"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="383dp"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="401dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button33" />
 
     <Button
         android:id="@+id/button44"
@@ -73,39 +78,37 @@
         android:layout_below="@+id/button43"
         android:background="#f9f1f1"
         android:text="How to Get Rid"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="354dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button43" />
 
     <ImageView
         android:id="@+id/imageView24"
         android:layout_width="match_parent"
         android:layout_height="113dp"
         android:layout_alignTop="@+id/view3"
-        android:layout_marginTop="-3dp"
-        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button44"
         app:srcCompat="@drawable/medicalbackground" />
 
     <Button
         android:id="@+id/button26"
         android:layout_width="20dp"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_alignTop="@+id/button33"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:background="@android:color/transparent"
         android:text=">"
-        android:textSize="15dp" />
+        android:textColor="#000000"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="349dp"
+        tools:layout_editor_absoluteY="415dp" />
 
     <Button
         android:id="@+id/button30"
@@ -114,12 +117,12 @@
         android:layout_alignTop="@+id/view2"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:background="@android:color/transparent"
         android:text=">"
-        android:textSize="15dp" />
+        android:textColor="#000000"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="349dp"
+        tools:layout_editor_absoluteY="367dp" />
 
     <Button
         android:id="@+id/button46"
@@ -127,10 +130,11 @@
         android:layout_height="32dp"
         android:layout_alignTop="@+id/view3"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="365dp"
-        android:layout_marginTop="-35dp"
         android:background="@android:color/transparent"
         android:text=">"
-        android:textSize="15dp" />
+        android:textColor="#000000"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="349dp"
+        tools:layout_editor_absoluteY="318dp" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
