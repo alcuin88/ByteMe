@@ -7,94 +7,84 @@
     android:background="@drawable/bluebackground"
     tools:context=".Dashboard">
 
-    <ImageButton
-        android:id="@+id/scanButton"
-        android:layout_width="122dp"
-        android:layout_height="162dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/scan" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/listButton"
-        android:layout_width="123dp"
-        android:layout_height="162dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/scanButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/list" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/pestButton"
-        android:layout_width="123dp"
-        android:layout_height="161dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="23dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/aboutButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanButton"
-        app:srcCompat="@drawable/pestcontrolservices" />
+            <ImageButton
+                android:id="@+id/scanButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/scan" />
 
-    <ImageButton
-        android:id="@+id/profileButton"
-        android:layout_width="121dp"
-        android:layout_height="159dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="22dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/settingsButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pestButton"
-        app:layout_constraintTop_toBottomOf="@+id/listButton"
-        app:srcCompat="@drawable/profile" />
+            <ImageButton
+                android:id="@+id/listButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/list" />
+        </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/aboutButton"
-        android:layout_width="122dp"
-        android:layout_height="161dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/about" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/settingsButton"
-        android:layout_width="121dp"
-        android:layout_height="163dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="11dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/settings" />
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/profile" />
+
+            <ImageButton
+                android:id="@+id/pestButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/pestcontrolservices" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/settings" />
+
+            <ImageButton
+                android:id="@+id/aboutButton"
+                android:layout_width="122dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/about" />
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

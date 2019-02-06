@@ -17,6 +17,7 @@ public class Dashboard extends AppCompatActivity {
 
         refIDs();
         scan.setOnClickListener(ButtonClick);
+
     }
 
     private OnClickListener ButtonClick = new OnClickListener() {
