@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Dashboard extends AppCompatActivity {
-    Button scan, list, pestControl, profile, about, settings;
+    ImageButton scan, settings, list, pest, profile, about;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,6 @@ public class Dashboard extends AppCompatActivity {
 
         refIDs();
         scan.setOnClickListener(ButtonClick);
-        profile.setOnClickListener(ButtonClick);
     }
 
     private OnClickListener ButtonClick = new OnClickListener() {
@@ -29,25 +28,35 @@ public class Dashboard extends AppCompatActivity {
                     startActivity(scanIntent);
                     break;
 
+                case R.id.settingsButton:
+                    Intent settingsIntent = new Intent(view.getContext(), Settings.class);
+                    startActivity(settingsIntent);
+                    break;
+
+                case R.id.listButton:
+                    Intent insectListIntent = new Intent(view.getContext(), InsectFamilyList.class);
+                    startActivity(insectListIntent);
+                    break;
+
                 case R.id.profileButton:
                     Intent profileIntent = new Intent(view.getContext(), UserProfile.class);
                     startActivity(profileIntent);
                     break;
 
-                case R.id.listButton:
-                    Intent listIntent = new Intent(view.getContext(), InsectFamilyList.class);
-                    startActivity(listIntent);
+                case R.id.aboutButton:
+                    Intent aboutIntent = new Intent(view.getContext(), About.class);
+                    startActivity(aboutIntent);
                     break;
             }
         }
     };
 
     public void refIDs(){
+        settings = findViewById(R.id.settingsButton);
         scan = findViewById(R.id.scanButton);
         list = findViewById(R.id.listButton);
-        pestControl = findViewById(R.id.pestButton);
+        pest = findViewById(R.id.pestButton);
         profile = findViewById(R.id.profileButton);
         about = findViewById(R.id.aboutButton);
-        settings = findViewById(R.id.settingsButton);
     }
 }

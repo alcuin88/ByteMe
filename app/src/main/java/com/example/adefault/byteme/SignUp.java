@@ -8,16 +8,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
     Button signIn, signUp;
     EditText username, email, password;
-    FirebaseDatabase database;
-    DatabaseReference ref;
-    Members members;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +36,6 @@ public class SignUp extends AppCompatActivity {
                     break;
 
                 case R.id.signUpButton:
-                    members.setUsername(username.getText().toString().trim());
-                    members.setEmail(email.getText().toString().trim());
-                    members.setPassword(password.getText().toString().trim());
-                    ref.push().setValue(members);
-                    Toast.makeText(SignUp.this, "Data inserted sucessfully", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -58,8 +48,5 @@ public class SignUp extends AppCompatActivity {
         username = findViewById(R.id.usernameTextBox);
         email = findViewById(R.id.emailTextbox);
         password = findViewById(R.id.passwordTextBox);
-        database = FirebaseDatabase.getInstance();
-        ref = database.getReference("Users");
-        members = new Members();
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,14 @@
         android:layout_height="142dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginRight="123dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile" />
 
     <TextView
@@ -22,10 +29,19 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/imageView18"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="196dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginRight="118dp"
+        android:layout_marginBottom="57dp"
         android:text="Simon Delprado"
         android:textColor="#000000"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
     <ImageView
         android:id="@+id/imageView25"
@@ -33,8 +49,10 @@
         android:layout_height="112dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button50"
         app:srcCompat="@drawable/medicalbackground" />
 
     <Button
@@ -43,19 +61,15 @@
         android:layout_height="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="291dp"
+        android:layout_marginTop="57dp"
         android:background="#f9f1f1"
         android:text="Activities"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="345dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
         android:id="@+id/button49"
@@ -64,71 +78,25 @@
         android:layout_below="@+id/view2"
         android:background="#f9f1f1"
         android:text="Information"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="383dp"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="396dp"
-        android:background="#f2f1f1" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button45" />
 
     <Button
         android:id="@+id/button50"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_above="@+id/imageView25"
-        android:layout_marginBottom="0dp"
         android:background="#f9f1f1"
         android:text="Archive"
+        android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button49" />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="452dp"
-        android:background="#f2f1f1" />
-
-    <Button
-        android:id="@+id/button56"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button45"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/transparent"
-        android:text=">" />
-
-    <Button
-        android:id="@+id/button57"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button56"
-        android:layout_alignBottom="@+id/view3"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="15dp"
-        android:background="@android:color/transparent"
-        android:text=">" />
-
-    <Button
-        android:id="@+id/button59"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView25"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="3dp"
-        android:background="@android:color/transparent"
-        android:text=">" />
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -7,18 +7,5 @@
     android:background="@drawable/bluebackground"
     tools:context=".InsectScan">
 
-    <SurfaceView
-        android:id="@+id/surface_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    
-    <TextView
-        android:id="@+id/text_view"
-        android:text="No Text"
-        android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>

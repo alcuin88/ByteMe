@@ -15,17 +15,6 @@
         android:background="#ffff"
         tools:context=".ResultPerInsect">
 
-        <Button
-            android:id="@+id/button32"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_alignParentTop="true"
-            android:background="#86e2e9"
-            android:text="Result"
-            android:textColor="#ffff"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
         <ImageView
             android:id="@+id/imageView16"
             android:layout_width="145dp"
@@ -58,7 +47,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginBottom="281dp"
-            android:background="#ffc8c8"
+            android:background="#86e2e9"
             android:text="Information" />
 
         <Button
@@ -71,7 +60,7 @@
             android:layout_marginStart="-6dp"
             android:layout_marginLeft="-6dp"
             android:layout_marginTop="0dp"
-            android:background="#ffc8c8"
+            android:background="#86e2e9"
             android:text="First Aid Treatment" />
 
         <Button
@@ -83,7 +72,7 @@
             android:layout_marginLeft="-9dp"
             android:layout_toEndOf="@+id/imageView16"
             android:layout_toRightOf="@+id/imageView16"
-            android:background="#ffc8c8"
+            android:background="#86e2e9"
             android:text="Pest Control" />
 
         <ImageView
@@ -108,25 +97,11 @@
             android:layout_marginStart="11dp"
             android:layout_marginLeft="11dp"
             android:layout_marginBottom="35dp"
-            android:background="@drawable/submit"
+            android:background="@drawable/signinroundbutton"
             android:text="Save"
             android:textColor="#ffff"
             android:textSize="20dp"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button51"
-            android:layout_width="30dp"
-            android:layout_height="46dp"
-            android:layout_above="@+id/imageView16"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="-59dp"
-            android:background="@android:color/transparent"
-            android:text=">"
-            android:textSize="15dp" />
 
         <Button
             android:id="@+id/button52"
@@ -136,7 +111,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="-281dp"
-            android:background="#fff3f3" />
+            android:background="#d4f7ff" />
 
         <TextView
             android:id="@+id/textView18"
@@ -159,7 +134,7 @@
             android:layout_alignTop="@+id/button52"
             android:layout_toEndOf="@+id/button52"
             android:layout_toRightOf="@+id/button52"
-            android:background="#fff3f3" />
+            android:background="#d4f7ff"/>
 
         <TextView
             android:id="@+id/textView19"
@@ -183,7 +158,7 @@
             android:layout_marginLeft="-1dp"
             android:layout_toEndOf="@+id/button53"
             android:layout_toRightOf="@+id/button53"
-            android:background="#fff3f3" />
+            android:background="#d4f7ff"/>
 
         <TextView
             android:id="@+id/textView20"
@@ -197,6 +172,41 @@
             android:layout_marginRight="16dp"
             android:text="Ambot hahaha"
             android:textColor="#000000" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:background="#86e2e9"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="Result"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </ScrollView>
