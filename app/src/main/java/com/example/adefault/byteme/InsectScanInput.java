@@ -73,8 +73,8 @@ public class InsectScanInput extends AppCompatActivity {
                     for(int i = 0; i < 3; i++){
                         result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         byteArray[i] = byteArrayOutputStream.toByteArray();
-                        Prediction(byteArray);
                     }
+                    Prediction(byteArray);
                     break;
             }
         }

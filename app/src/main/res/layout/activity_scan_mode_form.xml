@@ -86,12 +86,17 @@
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:text="Scode Mode"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Scan Mode"
         android:textColor="#ffffff"
         android:textSize="25dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="@+id/toolbar17"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/toolbar17"
+        app:layout_constraintTop_toTopOf="@+id/toolbar17" />
 
 
 </android.support.constraint.ConstraintLayout>

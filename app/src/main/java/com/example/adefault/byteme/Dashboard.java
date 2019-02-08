@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
     ImageButton scan, settings, list, pest, profile, about;
@@ -17,7 +18,11 @@ public class Dashboard extends AppCompatActivity {
 
         refIDs();
         scan.setOnClickListener(ButtonClick);
-
+        settings.setOnClickListener(ButtonClick);
+        list.setOnClickListener(ButtonClick);
+        pest.setOnClickListener(ButtonClick);
+        profile.setOnClickListener(ButtonClick);
+        about.setOnClickListener(ButtonClick);
     }
 
     private OnClickListener ButtonClick = new OnClickListener() {
@@ -47,6 +52,14 @@ public class Dashboard extends AppCompatActivity {
                 case R.id.aboutButton:
                     Intent aboutIntent = new Intent(view.getContext(), About.class);
                     startActivity(aboutIntent);
+                    break;
+
+                default:
+                    CharSequence text = "This function is not yet available.\nPlease stay tuned for our next update.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(view.getContext(), text, duration);
+                    toast.show();
                     break;
             }
         }

@@ -30,8 +30,10 @@
         android:textColor="#ffff"
         android:textSize="25dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="@+id/toolbar15"
+        app:layout_constraintStart_toStartOf="@+id/toolbar15"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -40,7 +42,8 @@
         android:background="#86e2e9"
         app:srcCompat="@drawable/ic_chevron_right_black_24dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="11dp" />
+        tools:layout_editor_absoluteY="11dp"
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
         <Button
             android:id="@+id/button"
@@ -245,7 +248,8 @@
         android:background="#e1e1e1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="489dp" />
+        tools:layout_editor_absoluteY="489dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button16"
