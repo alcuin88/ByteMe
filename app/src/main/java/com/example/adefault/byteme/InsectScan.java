@@ -13,7 +13,7 @@ public class InsectScan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insect_scan);
         refIDs();
-        result.setText(InsectScanInput.GetResult());
+        result.setText(PredictionProcess.GetResult());
     }
 
     private void refIDs(){
