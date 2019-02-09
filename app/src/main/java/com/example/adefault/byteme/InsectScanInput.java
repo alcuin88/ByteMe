@@ -210,6 +210,8 @@ public class InsectScanInput extends AppCompatActivity {
                 displayResult += "\n\nInsect Name: " + temp.GetInsectName()
                         + "\nConfidence: " + temp.GetConfidence();
             }
+            if(displayResult.equalsIgnoreCase(""))
+                displayResult = "No Results Found.";
         }
 
         @Override
