@@ -1,6 +1,8 @@
 package com.example.adefault.bytemeAPP;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -20,14 +22,24 @@ import java.util.concurrent.ExecutionException;
 
 public class InsectFamilyList extends AppCompatActivity {
 
-    private List<BugsListResponse> list = new ArrayList<>();
-    Firestore db;
+    private List<BugsListResponse> list;
+    private RecyclerView mBugs;
+    private Firestore db;
+    private BugsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insect_family_list);
+        mBugs = findViewById(R.id.bugs_list);
         init();
+        try {
+            getData();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void init(){
@@ -36,7 +48,7 @@ public class InsectFamilyList extends AppCompatActivity {
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(credentials)
-                    .setProjectId("options")
+                    .setProjectId("bytemev1")
                     .build();
 
             FirebaseApp.initializeApp(options);
@@ -48,18 +60,26 @@ public class InsectFamilyList extends AppCompatActivity {
         }
     }
     public void getData() throws ExecutionException, InterruptedException {
-        ApiFuture<QuerySnapshot> query = db.collection("users").get();
+        ApiFuture<QuerySnapshot> query = db.collection("Bugs").get();
 
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        int count = 0;
         for (QueryDocumentSnapshot document : documents) {
-            System.out.println("User: " + document.getId());
-            System.out.println("First: " + document.getString("first"));
-            if (document.contains("middle")) {
-                System.out.println("Middle: " + document.getString("middle"));
+            String insectName = document.getString("InsectName");
+            String insectImage = document.getString("InsectImage");
+            if(count == 0) {
+                list = BugsListResponse.createBugsList(insectName, insectImage);
+                adapter = new BugsListAdapter(list);
             }
-            System.out.println("Last: " + document.getString("last"));
-            System.out.println("Born: " + document.getLong("born"));
+            else {
+                list.addAll(BugsListResponse.createBugsList(insectName, insectImage));
+            }
+            count++;
+
+            mBugs.setAdapter(adapter);
+
+            mBugs.setLayoutManager(new LinearLayoutManager(this));
         }
     }
 }

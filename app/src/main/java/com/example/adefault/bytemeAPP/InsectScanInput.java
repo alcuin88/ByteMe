@@ -37,7 +37,7 @@ public class InsectScanInput extends AppCompatActivity {
 
     private OnClickListener ClickListener = view -> {
         switch(view.getId()){
-            case R.id.scanInsectButton:
+            case R.id.scanBiteButton:
                 StartCamera();
                 break;
 
@@ -125,8 +125,8 @@ public class InsectScanInput extends AppCompatActivity {
     }
 
     private void refIDs(){
-        scanInsect = findViewById(R.id.scanInsectButton);
-        selectedImage = findViewById(R.id.insectImage);
+        scanInsect = findViewById(R.id.scanBiteButton);
+        selectedImage = findViewById(R.id.biteImage);
         uploadImage = findViewById(R.id.uploadImage);
         process = findViewById(R.id.process);
     }

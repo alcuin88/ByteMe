@@ -29,7 +29,7 @@ public class PredictionProcess {
     public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials, String modelID){
         new LongOperation(context).execute(imageBytes);
         this.credentials = credentials;
-        this.modelID = "ICN6559731632964049689";
+        this.modelID = modelID;
     }
 
     public static String GetResult(){

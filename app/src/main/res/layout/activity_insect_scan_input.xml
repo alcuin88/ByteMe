@@ -8,7 +8,7 @@
     tools:context=".InsectScanInput">
 
     <ImageView
-        android:id="@+id/insectImage"
+        android:id="@+id/biteImage"
         android:layout_width="384dp"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
@@ -24,10 +24,10 @@
         app:srcCompat="@drawable/honeybee" />
 
     <Button
-        android:id="@+id/scanInsectButton"
+        android:id="@+id/scanBiteButton"
         android:layout_width="141dp"
         android:layout_height="56dp"
-        android:layout_alignLeft="@+id/insectImage"
+        android:layout_alignLeft="@+id/biteImage"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="38dp"
         android:layout_marginLeft="38dp"
@@ -43,14 +43,14 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView21"
         app:layout_constraintEnd_toStartOf="@+id/uploadImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insectImage" />
+        app:layout_constraintTop_toBottomOf="@+id/biteImage" />
 
     <Button
         android:id="@+id/uploadImage"
         android:layout_width="141dp"
         android:layout_height="56dp"
-        android:layout_alignTop="@+id/scanInsectButton"
-        android:layout_alignRight="@+id/insectImage"
+        android:layout_alignTop="@+id/scanBiteButton"
+        android:layout_alignRight="@+id/biteImage"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
@@ -62,7 +62,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView21"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insectImage" />
+        app:layout_constraintTop_toBottomOf="@+id/biteImage" />
 
     <ImageView
         android:id="@+id/imageView21"
@@ -103,7 +103,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanInsectButton" />
+        app:layout_constraintTop_toBottomOf="@+id/scanBiteButton" />
 
 
 </android.support.constraint.ConstraintLayout>

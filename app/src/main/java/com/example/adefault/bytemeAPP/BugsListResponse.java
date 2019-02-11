@@ -1,5 +1,7 @@
 package com.example.adefault.bytemeAPP;
 
+import java.util.ArrayList;
+
 public class BugsListResponse {
 
     private String InsectName;
@@ -19,5 +21,16 @@ public class BugsListResponse {
         return InsectImage;
     }
 
+    private static int lastBugId = 0;
+
+    public static ArrayList<BugsListResponse> createBugsList(String insectName, String insectImage) {
+        ArrayList<BugsListResponse> list = new ArrayList<BugsListResponse>();
+
+
+        list.add(new BugsListResponse(insectName, insectImage));
+
+
+        return list;
+    }
 
 }
