@@ -1,13 +1,13 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Result extends AppCompatActivity {
+public class InsectSpeciesList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_insect_species_list);
     }
 }

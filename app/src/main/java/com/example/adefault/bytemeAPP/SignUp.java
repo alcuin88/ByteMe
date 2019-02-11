@@ -1,13 +1,11 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
@@ -24,20 +22,17 @@ public class SignUp extends AppCompatActivity {
         signUp.setOnClickListener(ClickListener);
     }
 
-    private OnClickListener ClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch(view.getId()){
-                case R.id.signInButton:
-                    Intent signInIntent = new Intent(view.getContext(), Login.class);
-                    signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(signInIntent);
-                    finish();
-                    break;
+    private OnClickListener ClickListener = view -> {
+        switch(view.getId()){
+            case R.id.signInButton:
+                Intent signInIntent = new Intent(view.getContext(), Login.class);
+                signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(signInIntent);
+                finish();
+                break;
 
-                case R.id.signUpButton:
-                    break;
-            }
+            case R.id.signUpButton:
+                break;
         }
     };
 

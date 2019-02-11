@@ -1,24 +1,18 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapRegionDecoder;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.auth.oauth2.GoogleCredentials;
-
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -41,29 +35,26 @@ public class InsectScanInput extends AppCompatActivity {
         process.setOnClickListener(ClickListener);
     }
 
-    private OnClickListener ClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch(view.getId()){
-                case R.id.scanInsectButton:
-                    StartCamera();
-                    break;
+    private OnClickListener ClickListener = view -> {
+        switch(view.getId()){
+            case R.id.scanInsectButton:
+                StartCamera();
+                break;
 
-                case R.id.uploadImage:
-                    OpenGallery();
-                    break;
+            case R.id.uploadImage:
+                OpenGallery();
+                break;
 
-                case R.id.process:
-                    byte[][] byteArray = new byte[3][];
-                    for(int i = 0; i < 3; i++){
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                        byteArray[i] = byteArrayOutputStream.toByteArray();
-                    }
-                    PredictionProcess process = new PredictionProcess();
-                    process.main(view.getContext(), byteArray, getCredentials(), modelID);
-                    break;
-            }
+            case R.id.process:
+                byte[][] byteArray = new byte[3][];
+                for(int i = 0; i < 3; i++){
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byteArray[i] = byteArrayOutputStream.toByteArray();
+                }
+                PredictionProcess process = new PredictionProcess();
+                process.main(view.getContext(), byteArray, getCredentials(), modelID);
+                break;
         }
     };
 

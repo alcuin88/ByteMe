@@ -1,13 +1,13 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class BiteMarkScan extends AppCompatActivity {
+public class BiteScanInput extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bite_mark_scan);
+        setContentView(R.layout.activity_bite_scan_input);
     }
 }

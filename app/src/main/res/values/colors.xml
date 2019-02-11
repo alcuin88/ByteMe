@@ -7,4 +7,5 @@
     <color name="signup">#ff4351</color>
     <color name="dashboard">#b8d0e3</color>
     <color name="submit">#fa7898</color>
+    <color name="colorBackground">#eeeeee</color>
 </resources>

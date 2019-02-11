@@ -1,4 +1,4 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,9 +1,8 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.google.api.gax.core.FixedCredentialsProvider;

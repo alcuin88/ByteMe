@@ -1,4 +1,4 @@
-package com.example.adefault.byteme;
+package com.example.adefault.bytemeAPP;
 
 import org.junit.Test;
 
