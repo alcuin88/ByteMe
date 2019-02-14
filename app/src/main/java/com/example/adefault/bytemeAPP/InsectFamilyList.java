@@ -1,97 +1,86 @@
 package com.example.adefault.bytemeAPP;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.cloud.FirestoreClient;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
+import butterknife.BindView;
 
 public class InsectFamilyList extends AppCompatActivity {
 
-    private FirebaseApp firebaseApp;
+    private static final String TAG = "InsectFamilyList";
     private RecyclerView mBugs;
-    private Firestore db;
-    private BugsListAdapter adapter;
     private List<BugsListResponse> list;
+    private ProgressBar progressBar;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refIDs();
+        init();
+        get();
+    }
+
+    public void refIDs(){
         setContentView(R.layout.activity_insect_family_list);
         mBugs = findViewById(R.id.bugs_list);
-        init();
-        try {
-            getData();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     public void init(){
-        boolean isInit = false;
-        try{
-            List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
-            for(FirebaseApp app : firebaseApps){
-                if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
-                    isInit = true;
-                    firebaseApp = app;
-                }
-            }
-            if(!isInit){
-                InputStream serviceAccount  = getResources().openRawResource(R.raw.credentials);
-                GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-                FirebaseOptions options = new FirebaseOptions.Builder()
-                        .setCredentials(credentials)
-                        .setProjectId("bytemev1")
-                        .build();
-
-                firebaseApp = FirebaseApp.initializeApp(options);
-            }
-            db = FirestoreClient.getFirestore();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Bugs_List");
     }
 
+    public void get(){
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                list = new ArrayList<BugsListResponse>();
+                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                    BugsListResponse value = dataSnapshot1.getValue(BugsListResponse.class);
+                    BugsListResponse response = new BugsListResponse();
+                    String bugName = value.getBugName();
+                    String bugImage = value.getBugImage();
+                    response.setBugName(bugName);
+                    response.setBugImage(bugImage);
+                    list.add(response);
+                }
+                Display();
+            }
 
-    public void getData() throws ExecutionException, InterruptedException {
-        ApiFuture<QuerySnapshot> query = db.collection("Bugs").get();
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        int count = 0;
-        for (QueryDocumentSnapshot document : documents) {
-            String insectName = document.getString("InsectName");
-            String insectImage = document.getString("InsectImage");
-            if(count == 0) {
-                list = BugsListResponse.createBugsList(insectName, insectImage);
-                adapter = new BugsListAdapter(list);
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
-            else {
-                list.addAll(BugsListResponse.createBugsList(insectName, insectImage));
-            }
-            count++;
-        }
+        });
+    }
+
+    public void Display(){
+        progressBar.setVisibility(View.GONE);
+        BugsListAdapter adapter = new BugsListAdapter(list, this);
+        RecyclerView.LayoutManager recyce = new GridLayoutManager(this,2);
+        mBugs.setLayoutManager(recyce);
         mBugs.setAdapter(adapter);
-
-        mBugs.setLayoutManager(new LinearLayoutManager(this));
     }
 }

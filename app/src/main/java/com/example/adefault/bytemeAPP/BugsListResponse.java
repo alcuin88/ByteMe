@@ -1,41 +1,24 @@
 package com.example.adefault.bytemeAPP;
 
 
-import java.util.ArrayList;
-
-
 public class BugsListResponse {
 
-    private String InsectName;
+    private String BugName;
+    private String BugImage;
 
-    private String InsectImage;
-
-    public BugsListResponse(){
-
+    public String getBugName() {
+        return BugName;
     }
 
-    public BugsListResponse(String insectName, String insectImage) {
-        this.InsectImage = insectImage;
-        this.InsectName = insectName;
+    public void setBugName(String bugName) {
+        BugName = bugName;
     }
 
-    public String getInsectName() {
-        return InsectName;
+    public String getBugImage() {
+        return BugImage;
     }
 
-    public String getInsectImage() {
-        return InsectImage;
+    public void setBugImage(String bugImage) {
+        BugImage = bugImage;
     }
-
-    private static int lastBugId = 0;
-
-    public static ArrayList<BugsListResponse> createBugsList(String insectName, String insectImage) {
-        ArrayList<BugsListResponse> list = new ArrayList<BugsListResponse>();
-
-        list.add(new BugsListResponse(insectName, insectImage));
-
-
-        return list;
-    }
-
 }

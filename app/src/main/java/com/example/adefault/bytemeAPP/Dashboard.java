@@ -51,6 +51,11 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(aboutIntent);
                 break;
 
+            case R.id.pestButton:
+                Intent mapIntent = new Intent(view.getContext(), MapsActivity.class);
+                startActivity(mapIntent);
+                break;
+
             default:
                 CharSequence text = "This function is not yet available.\nPlease stay tuned for our next update.";
                 int duration = Toast.LENGTH_SHORT;
