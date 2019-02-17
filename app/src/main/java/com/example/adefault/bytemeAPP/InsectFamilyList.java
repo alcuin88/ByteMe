@@ -19,8 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 public class InsectFamilyList extends AppCompatActivity {
 
     private static final String TAG = "InsectFamilyList";

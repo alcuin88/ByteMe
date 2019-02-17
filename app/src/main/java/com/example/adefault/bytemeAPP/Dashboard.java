@@ -52,7 +52,7 @@ public class Dashboard extends AppCompatActivity {
                 break;
 
             case R.id.pestButton:
-                Intent mapIntent = new Intent(view.getContext(), MapsActivity.class);
+                Intent mapIntent = new Intent(view.getContext(), MainActivity.class);
                 startActivity(mapIntent);
                 break;
 
