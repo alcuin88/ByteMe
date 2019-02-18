@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -20,10 +22,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,12 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 13f;
+    private static final String API_KEY = "AIzaSyACOex929TfptSnad16icgpy-QXh-hgJCM";
 
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -62,13 +60,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<PestControlServices> list;
     private ArrayList<LatLng> listPoints;
     private LatLng myLocation;
+    private DownloadUrl downloadUrl;
+    private ImageView mGps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getLocationPermission();
+        mGps = findViewById(R.id.ic_gps);
         listPoints = new ArrayList<>();
+        downloadUrl = new DownloadUrl();
+
+        mGps.setOnClickListener(v -> {
+            mMap.clear();
+            getDeviceLocation();
+        });
     }
 
     @Override
@@ -86,7 +93,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             getDeviceLocation();
             mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
+
+        mMap.setOnMarkerClickListener(marker -> {
+            mMap.clear();
+            MarkerOptions options = new MarkerOptions()
+                    .position(marker.getPosition())
+                    .title(marker.getTitle())
+                    .snippet(marker.getSnippet());
+            mMap.addMarker(options);
+            nav(marker.getPosition());
+            return false;
+        });
     }
 
     private void getDeviceLocation(){
@@ -162,14 +181,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void showNearest(){
+        GetDirectionsData getDirectionsData;
         for (PestControlServices myList: list) {
             LatLng pestControl = new LatLng(myList.getLatitude(), myList.getLongitude());
-            MarkerOptions options = new MarkerOptions()
-                    .position(pestControl)
-                    .title(myList.getName());
-            mMap.addMarker(options);
+            Object[] transferData = new Object[3];
+            transferData[0] = mMap;
+            transferData[1] = getRequestUrl(myLocation, pestControl);
+            transferData[2] = myList;
+            getDirectionsData = new GetDirectionsData();
+            getDirectionsData.execute(transferData);
         }
-        nav();
+        listPoints.clear();
+        for (PestControlServices myList: list) {
+            LatLng latLng1 = new LatLng(myList.getLatitude(), myList.getLongitude());
+            listPoints.add(latLng1);
+        }
     }
 
     private void getLocationPermission(){
@@ -227,14 +253,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void nav(){
-        listPoints.clear();
-        for (PestControlServices myList: list) {
-            LatLng latLng1 = new LatLng(myList.getLatitude(), myList.getLongitude());
-            listPoints.add(latLng1);
-        }
-
-        String url = getRequestUrl(myLocation, listPoints.get(1));
+    public void nav(LatLng dest){
+        String url = getRequestUrl(myLocation, dest);
         TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
         taskRequestDirections.execute(url);
     }
@@ -244,44 +264,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
         String sensor = "sensor=false";
         String mode = "mode=driving";
-        String key = "key=" + "@string/google_maps_key";
+        String key = "key="+API_KEY;
         String param = str_org + "&" + str_dest + "&" + sensor + "&" + mode + "&" + key;
         String output = "json";
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param;
         return url;
-    }
-
-    private String requestDirection(String reqUrl) throws IOException {
-        String responseString = "";
-        InputStream inputStream = null;
-        HttpURLConnection httpURLConnection = null;
-        try{
-            URL url = new URL(reqUrl);
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.connect();
-            inputStream = httpURLConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            StringBuffer stringBuffer = new StringBuffer();
-            String line = "";
-
-            while((line = bufferedReader.readLine()) != null){
-                stringBuffer.append(line);
-            }
-
-            responseString = stringBuffer.toString();
-            bufferedReader.close();
-            inputStreamReader.close();
-
-        }catch (Exception e){
-            Toast.makeText(this, e + "", LENGTH_SHORT).show();
-        }finally {
-            if(inputStream != null){
-                inputStream.close();
-            }
-            httpURLConnection.disconnect();
-        }
-        return responseString;
     }
 
     public class TaskRequestDirections extends AsyncTask<String, Void, String>{
@@ -290,7 +277,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         protected String doInBackground(String... strings) {
             String responseString = "";
             try{
-                responseString = requestDirection(strings[0]);
+                responseString = downloadUrl.readUrl(strings[0]);
             }catch (IOException e){
                 e.printStackTrace();
             }
