@@ -1,27 +1,16 @@
 package com.example.adefault.bytemeAPP;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
+import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,15 +21,29 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -57,17 +60,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private List<PestControlServices> list;
+    private ArrayList<LatLng> listPoints;
+    private LatLng myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getLocationPermission();
+        listPoints = new ArrayList<>();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Map is Ready", LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
 
@@ -97,13 +103,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Location currentLocation = (Location)task.getResult();
                         if(currentLocation != null){
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "My Location");
+                            myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                         }
                         else
-                            Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Unable to get current location", LENGTH_SHORT).show();
                     }
                     else{
                         Log.d(TAG, "onComplete: current location is null");
-                        Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MapsActivity.this, "unable to get current location", LENGTH_SHORT).show();
                     }
                 });
             }
@@ -131,8 +138,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 list = new ArrayList<PestControlServices>();
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
                     PestControlServices value = dataSnapshot1.getValue(PestControlServices.class);
@@ -164,6 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .title(myList.getName());
             mMap.addMarker(options);
         }
+        nav();
     }
 
     private void getLocationPermission(){
@@ -218,6 +224,131 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     initMap();
                 }
                 break;
+        }
+    }
+
+    public void nav(){
+        listPoints.clear();
+        for (PestControlServices myList: list) {
+            LatLng latLng1 = new LatLng(myList.getLatitude(), myList.getLongitude());
+            listPoints.add(latLng1);
+        }
+
+        String url = getRequestUrl(myLocation, listPoints.get(1));
+        TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
+        taskRequestDirections.execute(url);
+    }
+
+    private String getRequestUrl(LatLng origin, LatLng dest){
+        String str_org = "origin=" + origin.latitude + "," + origin.longitude;
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        String sensor = "sensor=false";
+        String mode = "mode=driving";
+        String key = "key=" + "@string/google_maps_key";
+        String param = str_org + "&" + str_dest + "&" + sensor + "&" + mode + "&" + key;
+        String output = "json";
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param;
+        return url;
+    }
+
+    private String requestDirection(String reqUrl) throws IOException {
+        String responseString = "";
+        InputStream inputStream = null;
+        HttpURLConnection httpURLConnection = null;
+        try{
+            URL url = new URL(reqUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.connect();
+            inputStream = httpURLConnection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuffer stringBuffer = new StringBuffer();
+            String line = "";
+
+            while((line = bufferedReader.readLine()) != null){
+                stringBuffer.append(line);
+            }
+
+            responseString = stringBuffer.toString();
+            bufferedReader.close();
+            inputStreamReader.close();
+
+        }catch (Exception e){
+            Toast.makeText(this, e + "", LENGTH_SHORT).show();
+        }finally {
+            if(inputStream != null){
+                inputStream.close();
+            }
+            httpURLConnection.disconnect();
+        }
+        return responseString;
+    }
+
+    public class TaskRequestDirections extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String responseString = "";
+            try{
+                responseString = requestDirection(strings[0]);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            TaskParser taskParser = new TaskParser();
+            taskParser.execute(s);
+        }
+    }
+
+    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> >{
+
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
+            JSONObject jsonObject = null;
+            List<List<HashMap<String, String>>> routes = null;
+            try{
+                jsonObject = new JSONObject(strings[0]);
+                DirectionsParser directionsParser = new DirectionsParser();
+                routes = directionsParser.parse(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
+            ArrayList points = null;
+            PolylineOptions polylineOptions = null;
+
+            for(List<HashMap<String, String>> path: lists){
+                points = new ArrayList();
+                polylineOptions = new PolylineOptions();
+
+                for(HashMap<String, String> point : path){
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lon = Double.parseDouble(point.get("lon"));
+
+                    points.add(new LatLng(lat, lon));
+                }
+
+                polylineOptions.addAll(points);
+                polylineOptions.width(15);
+                polylineOptions.color(Color.BLUE);
+                polylineOptions.geodesic(true);
+            }
+
+            if(polylineOptions != null){
+                mMap.addPolyline(polylineOptions);
+            }else{
+                Toast.makeText(MapsActivity.this, "Direction not found!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
