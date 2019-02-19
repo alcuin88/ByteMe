@@ -1,17 +1,22 @@
 package com.example.adefault.bytemeAPP;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,7 +27,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
@@ -39,38 +43,40 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity";
-
+    private static final String API_KEY = "AIzaSyACOex929TfptSnad16icgpy-QXh-hgJCM";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 13f;
-    private static final String API_KEY = "AIzaSyACOex929TfptSnad16icgpy-QXh-hgJCM";
 
     private Boolean mLocationPermissionsGranted = false;
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private static GoogleMap mMap;
+    private static Context context;
     private List<PestControlServices> list;
-    private ArrayList<LatLng> listPoints;
     private LatLng myLocation;
     private DownloadUrl downloadUrl;
     private ImageView mGps;
 
+    private BottomSheetBehavior bottomSheetBehavior;
+    private View bottomSheet;
+    private Button showList;
+    private RecyclerView mPest;
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getLocationPermission();
-        mGps = findViewById(R.id.ic_gps);
-        listPoints = new ArrayList<>();
-        downloadUrl = new DownloadUrl();
+        refIDs();
 
         mGps.setOnClickListener(v -> {
             mMap.clear();
@@ -78,6 +84,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    private void refIDs(){
+        mGps = findViewById(R.id.ic_gps);
+        downloadUrl = new DownloadUrl();
+        bottomSheet = findViewById(R.id.bottom_sheet);
+        mPest = findViewById(R.id.pest_services_list);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setPeekHeight(bottomSheetBehavior.getPeekHeight());
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        showList = findViewById(R.id.show_list_button);
+        showList.setVisibility(View.GONE);
+        showList.setOnClickListener(clickListener);
+        context = this;
+    }
+
+    public View.OnClickListener clickListener = v -> {
+        if(v.getId() == R.id.show_list_button){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            showList.setVisibility(View.GONE);
+        }
+    };
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", LENGTH_SHORT).show();
@@ -96,22 +126,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
 
-        mMap.setOnMarkerClickListener(marker -> {
-            mMap.clear();
-            MarkerOptions options = new MarkerOptions()
-                    .position(marker.getPosition())
-                    .title(marker.getTitle())
-                    .snippet(marker.getSnippet());
-            mMap.addMarker(options);
-            nav(marker.getPosition());
-            return false;
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int newState) {
+                if (newState == BottomSheetBehavior.STATE_HIDDEN){
+                    showList.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+            }
         });
     }
 
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
             if(mLocationPermissionsGranted){
                 Task location = mFusedLocationProviderClient.getLastLocation();
@@ -121,7 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         Location currentLocation = (Location)task.getResult();
                         if(currentLocation != null){
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "My Location");
+                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), "My Location");
                             myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                         }
                         else
@@ -138,30 +170,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom, String title){
+    private void moveCamera(LatLng latLng, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MapsActivity.DEFAULT_ZOOM));
         if(!title.equalsIgnoreCase("My Location")){
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .title(title);
             mMap.addMarker(options);
         }
-        getNearestPestControl();
+        if(list == null)
+            getNearestPestControl();
+        else
+            showNearest();
     }
 
     private void getNearestPestControl(){
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("PestControlServices");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("PestControlServices");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list = new ArrayList<PestControlServices>();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
                     PestControlServices value = dataSnapshot1.getValue(PestControlServices.class);
                     PestControlServices response = new PestControlServices();
-                    String name = value.getName();
+                    String name = Objects.requireNonNull(value).getName();
                     float latitude = value.getLatitude();
                     float longitude = value.getLongitude();
                     response.setName(name);
@@ -173,7 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
@@ -181,21 +216,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void showNearest(){
-        GetDirectionsData getDirectionsData;
+        GetDirectionsData getDirectionsData = null;
         for (PestControlServices myList: list) {
-            LatLng pestControl = new LatLng(myList.getLatitude(), myList.getLongitude());
-            Object[] transferData = new Object[3];
-            transferData[0] = mMap;
-            transferData[1] = getRequestUrl(myLocation, pestControl);
-            transferData[2] = myList;
-            getDirectionsData = new GetDirectionsData();
-            getDirectionsData.execute(transferData);
+            MarkerOptions options = new MarkerOptions()
+                    .position(new LatLng(myList.getLatitude(), myList.getLongitude()))
+                    .title(myList.getName());
+            mMap.addMarker(options);
         }
-        listPoints.clear();
-        for (PestControlServices myList: list) {
-            LatLng latLng1 = new LatLng(myList.getLatitude(), myList.getLongitude());
-            listPoints.add(latLng1);
-        }
+        Object[] transferData = new Object[4];
+        transferData[0] = list;
+        transferData[1] = mPest;
+        transferData[2] = myLocation;
+        transferData[3] = this;
+        getDirectionsData = new GetDirectionsData();
+        getDirectionsData.execute(transferData);
     }
 
     private void getLocationPermission(){
@@ -227,7 +261,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(MapsActivity.this);
+        Objects.requireNonNull(mapFragment).getMapAsync(MapsActivity.this);
     }
 
     @Override
@@ -238,8 +272,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         switch (requestCode){
             case  LOCATION_PERMISSION_REQUEST_CODE:
                 if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
@@ -253,51 +287,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void nav(LatLng dest){
-        String url = getRequestUrl(myLocation, dest);
-        TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
-        taskRequestDirections.execute(url);
-    }
-
-    private String getRequestUrl(LatLng origin, LatLng dest){
-        String str_org = "origin=" + origin.latitude + "," + origin.longitude;
-        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-        String sensor = "sensor=false";
-        String mode = "mode=driving";
-        String key = "key="+API_KEY;
-        String param = str_org + "&" + str_dest + "&" + sensor + "&" + mode + "&" + key;
-        String output = "json";
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param;
-        return url;
-    }
-
-    public class TaskRequestDirections extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String responseString = "";
-            try{
-                responseString = downloadUrl.readUrl(strings[0]);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            return responseString;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            TaskParser taskParser = new TaskParser();
-            taskParser.execute(s);
-        }
-    }
-
-    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> >{
+    @SuppressLint("StaticFieldLeak")
+    public static class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> >{
 
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
-            JSONObject jsonObject = null;
+            JSONObject jsonObject;
             List<List<HashMap<String, String>>> routes = null;
             try{
                 jsonObject = new JSONObject(strings[0]);
@@ -311,16 +306,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
-            ArrayList points = null;
+            ArrayList<LatLng> points;
             PolylineOptions polylineOptions = null;
 
             for(List<HashMap<String, String>> path: lists){
-                points = new ArrayList();
+                points = new ArrayList<>();
                 polylineOptions = new PolylineOptions();
 
                 for(HashMap<String, String> point : path){
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lon = Double.parseDouble(point.get("lon"));
+                    double lat = Double.parseDouble(Objects.requireNonNull(point.get("lat")));
+                    double lon = Double.parseDouble(Objects.requireNonNull(point.get("lon")));
 
                     points.add(new LatLng(lat, lon));
                 }
@@ -334,8 +329,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(polylineOptions != null){
                 mMap.addPolyline(polylineOptions);
             }else{
-                Toast.makeText(MapsActivity.this, "Direction not found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Direction not found!", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }

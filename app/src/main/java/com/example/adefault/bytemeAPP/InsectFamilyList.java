@@ -77,7 +77,7 @@ public class InsectFamilyList extends AppCompatActivity {
     public void Display(){
         progressBar.setVisibility(View.GONE);
         BugsListAdapter adapter = new BugsListAdapter(list, this);
-        RecyclerView.LayoutManager recyce = new GridLayoutManager(this,2);
+        RecyclerView.LayoutManager recyce = new GridLayoutManager(this,1);
         mBugs.setLayoutManager(recyce);
         mBugs.setAdapter(adapter);
     }
