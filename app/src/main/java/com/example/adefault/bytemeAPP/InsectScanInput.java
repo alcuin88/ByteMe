@@ -60,7 +60,8 @@ public class InsectScanInput extends AppCompatActivity {
 
     public GoogleCredentials getCredentials(){
         try{
-            InputStream stream = getResources().openRawResource(R.raw.credentials);
+           InputStream stream = getResources().openRawResource(R.raw.credentials);
+     //       InputStream stream = getResources().openRawResource();
             return GoogleCredentials.fromStream(stream);
         } catch (IOException e) {
             e.printStackTrace();

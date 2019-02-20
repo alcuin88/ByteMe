@@ -40,8 +40,8 @@ public class SignUp extends AppCompatActivity {
     public void refIDs(){
         signIn = (Button)findViewById(R.id.signInButton);
         signUp = findViewById(R.id.signUpButton);
-        username = findViewById(R.id.usernameTextBox);
-        email = findViewById(R.id.emailTextbox);
-        password = findViewById(R.id.passwordTextBox);
+        username = findViewById(R.id.userNameEditText);
+        email = findViewById(R.id.emailEditText);
+        password = findViewById(R.id.passwordEditText);
     }
 }

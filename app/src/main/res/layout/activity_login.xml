@@ -4,109 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluebackground"
+    android:background="@drawable/uibg"
     tools:context=".Login">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="186dp"
-        android:layout_height="186dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginRight="98dp"
-        app:srcCompat="@drawable/byteme" />
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentTop="true">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="22dp"
-        android:layout_height="24dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="233dp"
-        app:srcCompat="@drawable/usericon" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="186dp"
+            android:layout_height="186dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/bytemelogo" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="259dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="51dp"
-        android:layout_marginRight="51dp"
-        android:layout_marginBottom="223dp"
-        android:ems="10"
-        android:hint="User Name"
-        android:inputType="textPersonName" />
+        <LinearLayout
+            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="22dp"
-        android:layout_height="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="180dp"
-        android:layout_toStartOf="@+id/editText"
-        android:layout_toLeftOf="@+id/editText"
-        app:srcCompat="@drawable/passwordicon" />
+            <LinearLayout
+                android:layout_height="130dp"
+                android:layout_width="36dp"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="259dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignTop="@+id/imageView5"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="-11dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPersonName" />
+                <ImageView
+                    android:layout_height="27dp"
+                    android:layout_width="20dp"
+                    android:id="@+id/imageView3"
+                    android:layout_margin="12dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/usericon"/>
 
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_width="106dp"
-        android:layout_height="33dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="94dp"
-        android:background="@drawable/signinroundbutton"
-        android:text="Login"
-        android:textColor="#ffff" />
+                <ImageView
+                    android:layout_height="27dp"
+                    android:layout_width="20dp"
+                    android:id="@+id/imageView11"
+                    android:layout_margin="12dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/passwordicon"/>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/signInButton"
-        android:layout_alignRight="@+id/signInButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="63dp"
-        android:text="Don't have an account?"
-        android:textColor="#000000" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="62dp"
-        android:layout_height="34dp"
-        android:layout_below="@+id/signInButton"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-91dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginRight="69dp"
-        android:background="@android:color/transparent"
-        android:text="Sign Up"
-        android:textColor="#ff0b0b" />
+            <LinearLayout
+                android:layout_height="130dp"
+                android:layout_width="250dp"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:layout_height="45dp"
+                    android:layout_width="match_parent"
+                    android:id="@+id/userNameEditText"
+                    android:textColorHint="#869299"
+                    android:textColor="#313b32"
+                    android:paddingLeft="5dp"
+                    android:inputType="textPersonName"
+                    android:hint="User Name"
+                    android:layout_marginRight="12dp"/>
+
+                <EditText
+                    android:layout_height="45dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/passwordEditText"
+                    android:textColorHint="#869299"
+                    android:textColor="#313b32"
+                    android:paddingLeft="5dp"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    android:layout_marginRight="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:background="@drawable/roundbtn"
+            android:layout_height="44dp"
+            android:layout_width="200dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/signInButton"
+            android:textColor="#ffff"
+            android:text="Login"
+            android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:id="@+id/dontHaveAccountTextView"
+            android:layout_gravity="center"
+            android:text="Don't have an account yet?"
+            android:textColor="#000000"/>
+
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_height="36dp"
+            android:layout_width="122dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/signUpButton"
+            android:textColor="#313b32"
+            android:text="SIGN UP"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
