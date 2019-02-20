@@ -39,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top|fill_vertical"
-            android:padding="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView

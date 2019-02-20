@@ -65,8 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView mGps;
 
     private BottomSheetBehavior bottomSheetBehavior;
-    private View bottomSheet;
     private Button showList;
+    private View bottomSheet;
     private RecyclerView mPest;
 
 
@@ -92,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(bottomSheetBehavior.getPeekHeight());
         bottomSheetBehavior.setHideable(true);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         showList = findViewById(R.id.show_list_button);
         showList.setVisibility(View.GONE);
         showList.setOnClickListener(clickListener);
@@ -223,11 +223,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .title(myList.getName());
             mMap.addMarker(options);
         }
-        Object[] transferData = new Object[4];
+        Object[] transferData = new Object[7];
         transferData[0] = list;
         transferData[1] = mPest;
         transferData[2] = myLocation;
         transferData[3] = this;
+        transferData[4] = mMap;
+        transferData[5] = bottomSheetBehavior;
+        transferData[6] = showList;
         getDirectionsData = new GetDirectionsData();
         getDirectionsData.execute(transferData);
     }

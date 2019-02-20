@@ -4,15 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,14 +25,21 @@ public class PestControlServicesAdapter extends
         RecyclerView.Adapter<PestControlServicesAdapter.ViewHolder>{
 
     private static final String API_KEY = "AIzaSyACOex929TfptSnad16icgpy-QXh-hgJCM";
-    Context context;
-    List<PestControlServicesResponse> mPestList;
-    LatLng orig;
+    private Context context;
+    private List<PestControlServicesResponse> mPestList;
+    private LatLng orig;
+    private GoogleMap mMap;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private Button showList;
 
-    public PestControlServicesAdapter(List<PestControlServicesResponse> PestsList, Context context, LatLng orig) {
+    public PestControlServicesAdapter(List<PestControlServicesResponse> PestsList, Context context,
+                                      LatLng orig, GoogleMap mMap, BottomSheetBehavior bottomSheetBehavior, Button showList) {
         mPestList = PestsList;
         this.context = context;
         this.orig = orig;
+        this.mMap = mMap;
+        this.bottomSheetBehavior = bottomSheetBehavior;
+        this.showList = showList;
     }
 
     @NonNull
@@ -60,6 +71,12 @@ public class PestControlServicesAdapter extends
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMap.clear();
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                MarkerOptions options = new MarkerOptions()
+                        .position(pestControlServicesResponse.getLatLng())
+                        .title(pestControlServicesResponse.getName());
+                mMap.addMarker(options);
                 nav(pestControlServicesResponse.getLatLng());
             }
         });

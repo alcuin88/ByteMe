@@ -2,9 +2,12 @@ package com.example.adefault.bytemeAPP;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -16,16 +19,19 @@ public class GetDirectionsData extends AsyncTask<Object, String, String> {
 
     private static final String API_KEY = "AIzaSyACOex929TfptSnad16icgpy-QXh-hgJCM";
 
-    RecyclerView mPest;
-    String url;
-    String[] googleDirectionsData;
-    String[] name;
-    String duration, distance;
-    List<PestControlServices> list;
-    LatLng orig, dest;
-    LatLng[] destination;
-    ArrayList<PestControlServicesResponse> thisList = new ArrayList<>();
-    Context context;
+    private RecyclerView mPest;
+    private GoogleMap mMap;
+    private String url;
+    private String[] googleDirectionsData;
+    private String[] name;
+    private String duration, distance;
+    private List<PestControlServices> list;
+    private LatLng orig, dest;
+    private LatLng[] destination;
+    private ArrayList<PestControlServicesResponse> thisList = new ArrayList<>();
+    private Context context;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private Button showList;
 
     @Override
     protected String doInBackground(Object... objects) {
@@ -33,6 +39,10 @@ public class GetDirectionsData extends AsyncTask<Object, String, String> {
         mPest = (RecyclerView)objects[1];
         orig = (LatLng) objects[2];
         context = (Context) objects[3];
+        mMap = (GoogleMap) objects[4];
+        bottomSheetBehavior = (BottomSheetBehavior) objects[5];
+        showList = (Button) objects[6];
+
         googleDirectionsData = new String[list.size()];
         name = new String[list.size()];
         destination = new LatLng[list.size()];
@@ -77,10 +87,11 @@ public class GetDirectionsData extends AsyncTask<Object, String, String> {
     }
 
     public void Display(){
-        PestControlServicesAdapter adapter = new PestControlServicesAdapter(thisList, context, orig);
+        PestControlServicesAdapter adapter = new PestControlServicesAdapter(thisList, context, orig, mMap, bottomSheetBehavior, showList);
         RecyclerView.LayoutManager recyce = new GridLayoutManager(context,1);
         mPest.setLayoutManager(recyce);
         mPest.setAdapter(adapter);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
     }
 
     private String getRequestUrl(LatLng origin, LatLng dest){
