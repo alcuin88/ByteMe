@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bluebackground"
+    android:gravity="top|fill_vertical"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorBackground"
-    tools:context=".InsectFamilyList" >
+    tools:context=".InsectFamilyList">
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foregroundGravity="center"
-        android:layout_centerHorizontal="true"/>
+        android:layout_gravity="center"
+        android:foregroundGravity="center" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bugs_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#00000000"/>
+        android:layout_gravity="center"
+        android:divider="#00000000" />
 
-
-</RelativeLayout>
+</LinearLayout>
 
