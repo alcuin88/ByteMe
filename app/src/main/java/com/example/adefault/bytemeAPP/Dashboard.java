@@ -7,19 +7,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 public class Dashboard extends AppCompatActivity {
     ImageButton scan, settings, list, pest, profile, about;
-    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
         refIDs();
         scan.setOnClickListener(ButtonClick);
@@ -29,8 +23,6 @@ public class Dashboard extends AppCompatActivity {
         profile.setOnClickListener(ButtonClick);
         about.setOnClickListener(ButtonClick);
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        mAdView.loadAd(adRequest);
     }
 
     private OnClickListener ButtonClick = view -> {
@@ -82,6 +74,5 @@ public class Dashboard extends AppCompatActivity {
         pest = findViewById(R.id.pestButton);
         profile = findViewById(R.id.profileButton);
         about = findViewById(R.id.aboutButton);
-        mAdView = findViewById(R.id.adView);
     }
 }

@@ -7,197 +7,214 @@
     android:background="#dad7d7"
     tools:context=".About">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="386dp"
-        android:layout_height="69dp"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="386dp"
+            android:layout_height="69dp"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="78dp"
-        android:layout_height="68dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profileicon" />
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="78dp"
+            android:layout_height="68dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profileicon" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:text="Simon Delprado"
-        android:textColor="#000"
-        app:layout_constraintEnd_toStartOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        tools:layout_editor_absoluteY="26dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:text="Simon Delprado"
+            android:textColor="#000"
+            app:layout_constraintEnd_toStartOf="@+id/toolbar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            tools:layout_editor_absoluteY="26dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar7"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar7"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="48dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/email"
-        tools:layout_editor_absoluteY="77dp" />
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="48dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/email"
+            tools:layout_editor_absoluteY="77dp"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="simondelprado@gmail.com"
-        android:textColor="#000"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="95dp" />
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="simondelprado@gmail.com"
+            android:textColor="#000"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="95dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar8"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="132dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar8"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="132dp"
+            tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="49dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/dateofbirthicon"
-        tools:layout_editor_absoluteY="139dp" />
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="49dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/dateofbirthicon"
+            tools:layout_editor_absoluteY="139dp"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="September 20, 1975"
-        android:textColor="#000"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="150dp" />
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="September 20, 1975"
+            android:textColor="#000"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="150dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar9"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="188dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar9"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:layout_editor_absoluteY="188dp"
+            tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="49dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/gendericon"
-        tools:layout_editor_absoluteY="193dp" />
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="49dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/gendericon"
+            tools:layout_editor_absoluteY="193dp"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Male"
-        android:textColor="#000"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="207dp" />
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textColor="#000"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="207dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar10"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar9"
-        tools:layout_editor_absoluteX="0dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar10"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar9"
+            tools:layout_editor_absoluteX="0dp"
+            tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="59dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/aboutusicon"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="258dp" />
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="59dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/aboutusicon"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="258dp"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About Us"
-        android:textColor="#000"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="265dp" />
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us"
+            android:textColor="#000"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="265dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar11"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="315dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar11"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="315dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar12"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="371dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar12"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="371dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar13"
-        android:layout_width="386dp"
-        android:layout_height="55dp"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="427dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar13"
+            android:layout_width="386dp"
+            android:layout_height="55dp"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="427dp"
+            tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar14"
-        android:layout_width="386dp"
-        android:layout_height="52dp"
-        android:background="#ffff"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="482dp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar14"
+            android:layout_width="386dp"
+            android:layout_height="52dp"
+            android:background="#ffff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="482dp"
+            tools:ignore="MissingConstraints" />
+
 
 </android.support.constraint.ConstraintLayout>

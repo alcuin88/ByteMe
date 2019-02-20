@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +30,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init(){
-        Button btnMap = findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
-        });
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
     }
 
     public boolean isServicesOK(){
