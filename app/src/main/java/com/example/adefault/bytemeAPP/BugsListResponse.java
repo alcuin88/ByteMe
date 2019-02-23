@@ -5,6 +5,24 @@ public class BugsListResponse {
 
     private String BugName;
     private String BugImage;
+    private String Description;
+    private String HomeTreatment;
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getHomeTreatment() {
+        return HomeTreatment;
+    }
+
+    public void setHomeTreatment(String homeTreatment) {
+        HomeTreatment = homeTreatment;
+    }
 
     public String getBugName() {
         return BugName;

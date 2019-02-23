@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 public class InsectScanInput extends AppCompatActivity {
 
-    private String modelID = "ICN6559731632964049689"; //model ID from autoML
+    private String modelID = "ICN362597613624515190"; //model ID from autoML
     private static Bitmap[] result = new Bitmap[5];
     private ImageView selectedImage;
     private Button scanInsect, uploadImage, process;
@@ -85,7 +85,7 @@ public class InsectScanInput extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmapInsect;
-        int maxSize = 100;
+        int maxSize = 50;
         if(requestCode == 0&& resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             assert extras != null;

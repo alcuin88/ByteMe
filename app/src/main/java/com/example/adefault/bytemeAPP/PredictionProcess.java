@@ -129,8 +129,7 @@ public class PredictionProcess {
                 }
             }
 
-            displayResult = "\nInsect Name: " + insectName
-                    + "\nConfidence: " + ((int)(confidence*100)) + "%";
+            displayResult = insectName;
             if(confidence == 0 && insectName.equalsIgnoreCase(""))
                 displayResult = "No Results Found.";
         }

@@ -85,7 +85,7 @@ public class BiteScanInput extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmapInsect;
-        int maxSize = 100;
+        int maxSize = 50;
         if(requestCode == 0&& resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             assert extras != null;
