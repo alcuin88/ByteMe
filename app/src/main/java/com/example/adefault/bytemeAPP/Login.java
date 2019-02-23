@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
 
     private OnClickListener SignInButton = view -> {
         if(view.getId() == R.id.signInButton){
-            Intent signInIntent = new Intent(view.getContext(), Dashboard.class);
+            Intent signInIntent = new Intent(view.getContext(), NavDrawer.class);
             startActivity(signInIntent);
         }
     };

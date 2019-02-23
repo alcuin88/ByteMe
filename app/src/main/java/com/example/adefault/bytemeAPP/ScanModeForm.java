@@ -34,7 +34,7 @@ public class ScanModeForm extends AppCompatActivity {
                 break;
 
             case R.id.backButton:
-                Intent backIntent = new Intent(view.getContext(), Dashboard.class);
+                Intent backIntent = new Intent(view.getContext(), NavDrawer.class);
                 backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(backIntent);
                 finish();

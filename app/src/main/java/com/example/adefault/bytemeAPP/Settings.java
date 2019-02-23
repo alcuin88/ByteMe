@@ -1,135 +1,162 @@
 package com.example.adefault.bytemeAPP;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.widget.AdapterView.*;
+import static android.widget.RadioGroup.*;
 
 public class Settings extends AppCompatActivity {
 
-    private Spinner popupSpinner, popupSpinner2;
-    private static final String[] Fonts = {"Arial", "Times New Roman", "Calibri", "Tahoma", "Georgia", "Comic Sans MS", "Aubrey", "Bodoni MT",
-    "Britanic Bold", "Californian FB", "Calisto MT", "Cambria", "Century", "Caviar Dreams", "Courgette", "Eras Light ITC", "Geosanslight",
-    "Gill Sans MT", "Goudy Old Style", "High Tower Text", "Imprint MT Shadow"};
-    private static final String[] FontSize = {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
-    "24", "25", "26", "27", "28", "29", "30"};
+    private List<String> fontStyleSpinnerArray = new ArrayList<>();
+    private List<Integer> fontSizeSpinnerArray = new ArrayList<>();
+    private Spinner fontStyleSpinner, fontSizeSpinner;
+    private TextView themeTextView;
+    private String fontStyle;
+    private int fontSize;
+    private Button save, cancel;
+    private int themeID;
+    private ConstraintLayout settingsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        popupSpinner = (Spinner)findViewById(R.id.popupSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Fonts);
-        popupSpinner.setAdapter(adapter);
-
-        popupSpinner.setOnClickListener(new View.OnClickListener() {
+        refIDs();
+        populateFontStyle();
+        populateFontSize();
+        fontStyleSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                fontStyle = parent.getItemAtPosition(position).toString();
+            }
 
-                if (popupSpinner.getSelectedItem().toString().trim().equals("Arial")) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Times New Roman")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Calibri")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Tahoma")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Georgia")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Comic Sans MS")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Aubrey")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Bodoni MT")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Britanic Bold")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Californian FB")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Calisto MT")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Cambria")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Century")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Caviar Dreams")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Courgette")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Eras Light ITC")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Geosanslight")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Gill Sans MT")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Goudy Old Style")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("High Tower Text")) {
-
-                } else if (popupSpinner.getSelectedItem().toString().trim().equals("Imprint MT Shadow")) {
-
-                }
-
-//                popupSpinner2 = findViewById(R.id.spinner2);
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, FontSize);
-//                popupSpinner2.setAdapter(adapter);
-
-                popupSpinner2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (popupSpinner2.getSelectedItem().toString().trim().equals("8")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("9")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("10")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("11")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("12")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("13")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("14")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("15")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("16")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("17")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("18")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("19")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("20")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("21")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("22")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("23")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("24")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("25")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("26")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("27")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("28")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("29")) {
-
-                        } else if (popupSpinner2.getSelectedItem().toString().trim().equals("30")) {
-                        }
-                    }
-                });
             }
         });
+        fontSizeSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                fontSize = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        save.setOnClickListener(clickListener);
+        cancel.setOnClickListener(clickListener);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.vampire_radioButton:
+                if (checked){
+                    themeID = R.id.vampire_radioButton;
+                }
+                    break;
+            case R.id.light_radioButton:
+                if (checked){
+                    themeID = R.id.light_radioButton;
+                }
+                    break;
+        }
+    }
+
+    public OnClickListener clickListener = v -> {
+        Intent backIntent;
+        switch (v.getId()){
+            case R.id.save:
+                toggleTheme();
+                break;
+            case R.id.cancel:
+                backIntent = new Intent(v.getContext(), NavDrawer.class);
+                backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(backIntent);
+                finish();
+                break;
+        }
+    };
+
+    public void populateFontStyle(){
+        fontStyleSpinnerArray.add("Arial");
+        fontStyleSpinnerArray.add("Times New Roman");
+        fontStyleSpinnerArray.add("Calibri");
+        fontStyleSpinnerArray.add("Tahoma");
+        fontStyleSpinnerArray.add("Georgia");
+        fontStyleSpinnerArray.add("Comic Sans MS");
+        fontStyleSpinnerArray.add("Aubrey");
+        fontStyleSpinnerArray.add("Bodoni MT");
+        fontStyleSpinnerArray.add("Britanic Bold");
+        fontStyleSpinnerArray.add("Californian FB");
+        fontStyleSpinnerArray.add("Calisto MT");
+        fontStyleSpinnerArray.add("Cambria");
+        fontStyleSpinnerArray.add("Century");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, fontStyleSpinnerArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fontStyleSpinner.setAdapter(adapter);
+    }
+
+    public void populateFontSize(){
+        for(int i = 6; i <= 72; i++){
+            fontSizeSpinnerArray.add(i);
+        }
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, fontSizeSpinnerArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fontSizeSpinner.setAdapter(adapter);
+    }
+
+    private void refIDs(){
+        fontStyleSpinner = findViewById(R.id.fontStyle_spinner);
+        fontSizeSpinner = findViewById(R.id.fontSize_spinner);
+        themeTextView = findViewById(R.id.themeTextView);
+        save = findViewById(R.id.save);
+        cancel = findViewById(R.id.cancel);
+        settingsLayout = findViewById(R.id.settings_layout);
+    }
+
+    private void toggleTheme(){
+        if(themeID == R.id.vampire_radioButton){
+            themeTextView.setTextColor(getResources().getColor(R.color.light));
+            settingsLayout.setBackgroundColor(getResources().getColor(R.color.vampire));
+            fontStyleSpinner.setBackgroundColor(getResources().getColor(R.color.vampire));
+            fontSizeSpinner.setBackgroundColor(getResources().getColor(R.color.vampire));
+        }else{
+            themeTextView.setTextColor(getResources().getColor(R.color.vampire));
+            settingsLayout.setBackgroundColor(getResources().getColor(R.color.light));
+            fontStyleSpinner.setBackgroundColor(getResources().getColor(R.color.light));
+            fontSizeSpinner.setBackgroundColor(getResources().getColor(R.color.light));
+        }
+        themeTextView.setTextSize(fontSize);
+        themeTextView.setFontFeatureSettings(fontStyle);
+        Toast.makeText(this, "Settings saved.", Toast.LENGTH_SHORT).show();
     }
 }
 

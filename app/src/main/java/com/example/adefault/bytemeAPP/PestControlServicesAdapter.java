@@ -68,17 +68,14 @@ public class PestControlServicesAdapter extends
         distance.setText(pestControlServicesResponse.getDistance());
         duration.setText(pestControlServicesResponse.getDuration());
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMap.clear();
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                MarkerOptions options = new MarkerOptions()
-                        .position(pestControlServicesResponse.getLatLng())
-                        .title(pestControlServicesResponse.getName());
-                mMap.addMarker(options);
-                nav(pestControlServicesResponse.getLatLng());
-            }
+        cardView.setOnClickListener(v -> {
+            mMap.clear();
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            MarkerOptions options = new MarkerOptions()
+                    .position(pestControlServicesResponse.getLatLng())
+                    .title(pestControlServicesResponse.getName());
+            mMap.addMarker(options);
+            nav(pestControlServicesResponse.getLatLng());
         });
 
     }
