@@ -18,7 +18,8 @@ import java.io.InputStream;
 
 public class InsectScanInput extends AppCompatActivity {
 
-    private String modelID = "ICN362597613624515190"; //model ID from autoML
+    private String modelID = "";
+    private String projectID;
     private static Bitmap[] result = new Bitmap[5];
     private ImageView selectedImage;
     private Button scanInsect, uploadImage, process;
@@ -53,7 +54,7 @@ public class InsectScanInput extends AppCompatActivity {
                     byteArray[i] = byteArrayOutputStream.toByteArray();
                 }
                 PredictionProcess process = new PredictionProcess();
-                process.main(view.getContext(), byteArray, getCredentials(), modelID);
+                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID);
                 break;
         }
     };
@@ -61,7 +62,6 @@ public class InsectScanInput extends AppCompatActivity {
     public GoogleCredentials getCredentials(){
         try{
            InputStream stream = getResources().openRawResource(R.raw.credentials);
-     //       InputStream stream = getResources().openRawResource();
             return GoogleCredentials.fromStream(stream);
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,5 +130,7 @@ public class InsectScanInput extends AppCompatActivity {
         selectedImage = findViewById(R.id.biteImage);
         uploadImage = findViewById(R.id.uploadImage);
         process = findViewById(R.id.process);
+        modelID = getResources().getString(R.string.bug_model);
+        projectID = getResources().getString(R.string.project_id);
     }
 }

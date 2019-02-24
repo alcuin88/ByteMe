@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
             Intent signUpIntent = new Intent(view.getContext(), SignUp.class);
             startActivity(signUpIntent);
         }else if(view.getId() == R.id.signInButton){
-            Intent signInIntent = new Intent(view.getContext(), Dashboard.class);
+            Intent signInIntent = new Intent(view.getContext(), NavDrawer.class);
             startActivity(signInIntent);
         }
     };

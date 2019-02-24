@@ -1,220 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dad7d7"
-    tools:context=".About">
+    android:fillViewport="true"
+    tools:context=".NavDrawer"
+    tools:showIn="@layout/app_bar_nav_drawer">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="386dp"
-            android:layout_height="69dp"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="78dp"
-            android:layout_height="68dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profileicon" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="26dp"
-            android:layout_marginRight="26dp"
-            android:text="Simon Delprado"
-            android:textColor="#000"
-            app:layout_constraintEnd_toStartOf="@+id/toolbar"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
-            tools:layout_editor_absoluteY="26dp"
-            tools:ignore="MissingConstraints" />
+            android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar7"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="254dp"
+                    app:srcCompat="@drawable/assassinbug" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="48dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/email"
-            tools:layout_editor_absoluteY="77dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="113dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="ByteMe"
+                    android:textSize="30dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#ffffff" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="simondelprado@gmail.com"
-            android:textColor="#000"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="95dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:text="A mobile-based first aid guide to insect bite"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar8"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="132dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="   This app focuses on identifying insects using a
+signs and symptoms, and the appropriate first aid
+treatments. Also, this includes list of available pest
+control services nearest to the user and a guide or
+ideas on how to make homemade remedies to keep
+your place safe from unwanted pests."
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"/>
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="49dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/dateofbirthicon"
-            tools:layout_editor_absoluteY="139dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="   Technology has improved our way of living in terms of
+transportation, communication, health, agriculture, education and in so many areas. It has brought a lot of changes that improved human’s life. Together with the rise of the technology today, smart phones provide a
+rich set of tools that let users control and interact with their environments. Its functions are becoming diversified and the performance has been improved. Current released image processing applications include
+face recognition, QR code or barcode recognition, image decoration and language translation, etc. Many real-time image processing applications will be developed for smart phones and smart pads. New inventions with
+the smart phone has been applied in different areas together in medical to easily help identify the symptoms, appropriate first aid and the insect that bite through the aid of image processing.	" />
 
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="September 20, 1975"
-            android:textColor="#000"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="150dp"
-            tools:ignore="MissingConstraints" />
+                <View
+                    android:layout_width="320dp"
+                    android:layout_height="2dp"
+                    android:background="#e1e1e1"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar9"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="188dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Developed by:"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="49dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/gendericon"
-            tools:layout_editor_absoluteY="193dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alcuin Allan Andrade"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/textView30"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"
-            android:textColor="#000"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="207dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Alexis Gacasan"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar10"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar9"
-            tools:layout_editor_absoluteX="0dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rowena P. Rocamora"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
 
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="59dp"
-            android:layout_height="40dp"
-            app:srcCompat="@drawable/aboutusicon"
-            tools:layout_editor_absoluteX="6dp"
-            tools:layout_editor_absoluteY="258dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maybele Collamat"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/textView31"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="About Us"
-            android:textColor="#000"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="265dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You can email us for some other concerns:"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar11"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="315dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="alcuin88@gmail.com"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar12"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="371dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="johnalexisgacasan@gmail.com"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar13"
-            android:layout_width="386dp"
-            android:layout_height="55dp"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="427dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="rowenaprocamora@gmail.com"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar14"
-            android:layout_width="386dp"
-            android:layout_height="52dp"
-            android:background="#ffff"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="482dp"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="maybelemayy@gmail.com"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"/>
 
-
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+</ScrollView>

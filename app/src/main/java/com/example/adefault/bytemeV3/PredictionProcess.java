@@ -24,12 +24,15 @@ public class PredictionProcess {
     private static String displayResult = "";
     private GoogleCredentials credentials;
     private String modelID;
+    private String projectID;
     private InsectNode head;
 
-    public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials, String modelID){
-        new LongOperation(context).execute(imageBytes);
+    public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials, String modelID, String projectID){
         this.credentials = credentials;
         this.modelID = modelID;
+        this.projectID = projectID;
+        new LongOperation(context).execute(imageBytes);
+
     }
 
     public static String GetResult(){
@@ -60,15 +63,15 @@ public class PredictionProcess {
             }
 
             for(int i = 0; i < 3; i++){
-                ModelName name = ModelName.of("bytemev1", "us-central1", modelID);
+                ModelName name = ModelName.of("prime-hour-232619", "us-central1", modelID);
                 ByteString content = ByteString.copyFrom(bytes[0][i]);
                 Image image = Image.newBuilder().setImageBytes(content).build();
                 ExamplePayload examplePayload = ExamplePayload.newBuilder().setImage(image).build();
 
                 Map<String, String> params = new HashMap<>();
                 params.put("score_threshold", "0.70");
-
                 PredictResponse response = predictionClient.predict(name, examplePayload, params);
+
 
                 for (AnnotationPayload annotationPayload : response.getPayloadList()) {
                     result =  annotationPayload.getDisplayName();

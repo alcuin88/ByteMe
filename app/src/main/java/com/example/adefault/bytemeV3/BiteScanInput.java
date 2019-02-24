@@ -18,7 +18,8 @@ import java.io.InputStream;
 
 public class BiteScanInput extends AppCompatActivity {
 
-    private String modelID = "ICN6180407538100259827"; //model ID from autoML
+    private String modelID = "";
+    private String projectID;
     private static Bitmap[] result = new Bitmap[5];
     private ImageView selectedImage;
     private Button scanInsectBite, uploadImage, process;
@@ -53,7 +54,7 @@ public class BiteScanInput extends AppCompatActivity {
                     byteArray[i] = byteArrayOutputStream.toByteArray();
                 }
                 PredictionProcess process = new PredictionProcess();
-                process.main(view.getContext(), byteArray, getCredentials(), modelID);
+                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID);
                 break;
         }
     };
@@ -129,5 +130,7 @@ public class BiteScanInput extends AppCompatActivity {
         selectedImage = findViewById(R.id.biteImage);
         uploadImage = findViewById(R.id.uploadImage);
         process = findViewById(R.id.process);
+        modelID = getResources().getString(R.string.bite_model);
+        projectID = getResources().getString(R.string.project_id);
     }
 }
