@@ -151,6 +151,7 @@ public class Settings extends AppCompatActivity {
         }
         themeTextView.setTextSize(fontSize);
         themeTextView.setFontFeatureSettings(fontStyle);
+        Toast.makeText(this, "Settings saved.", Toast.LENGTH_SHORT).show();
     }
 }
 
