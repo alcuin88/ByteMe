@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.adefault.bytemeAPP">
+    package="com.example.adefault.bytemeV3">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,11 +23,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
 
-        <activity android:name=".Login" />
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SignUp" />
         <activity android:name=".Dashboard" />
         <activity android:name=".ScanModeForm" />
@@ -42,8 +45,8 @@
         <activity android:name=".Settings" />
         <activity android:name=".About" />
         <activity android:name=".InsectSpeciesList" />
-        <activity android:name=".InsectFamilyList" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".InsectFamilyList"/>
+        <activity android:name=".MainActivity"/>
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -52,11 +55,7 @@
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme" />
         <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Home"></activity>
     </application>
