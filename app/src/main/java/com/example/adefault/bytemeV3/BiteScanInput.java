@@ -131,6 +131,6 @@ public class BiteScanInput extends AppCompatActivity {
         uploadImage = findViewById(R.id.uploadImage);
         process = findViewById(R.id.process);
         modelID = getResources().getString(R.string.bite_model);
-        projectID = getResources().getString(R.string.project_id);
+        projectID = getResources().getString(R.string.proj_id);
     }
 }
