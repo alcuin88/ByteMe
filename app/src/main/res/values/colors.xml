@@ -4,9 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="login">#262626</color>
-    <color name="signup">#ffffff</color>
     <color name="dashboard">#B8D0E3</color>
     <color name="submit">#fa7898</color>
     <color name="vampire">#262626</color>
     <color name="light">#f2f2f2</color>
+    
+    //OnBoarding
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparentWhite">#CCCCCC</color>
 </resources>

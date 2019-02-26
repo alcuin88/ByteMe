@@ -85,7 +85,7 @@ public class InsectScanInput extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmapInsect;
-        int maxSize = 50;
+        int maxSize = 100;
         if(requestCode == 0&& resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             assert extras != null;
@@ -131,6 +131,6 @@ public class InsectScanInput extends AppCompatActivity {
         uploadImage = findViewById(R.id.uploadImage);
         process = findViewById(R.id.process);
         modelID = getResources().getString(R.string.bug_model);
-        projectID = getResources().getString(R.string.project_id);
+        projectID = getResources().getString(R.string.proj_id);
     }
 }

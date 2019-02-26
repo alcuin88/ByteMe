@@ -63,7 +63,7 @@ public class PredictionProcess {
             }
 
             for(int i = 0; i < 3; i++){
-                ModelName name = ModelName.of("prime-hour-232619", "us-central1", modelID);
+                ModelName name = ModelName.of(projectID, "us-central1", modelID);
                 ByteString content = ByteString.copyFrom(bytes[0][i]);
                 Image image = Image.newBuilder().setImageBytes(content).build();
                 ExamplePayload examplePayload = ExamplePayload.newBuilder().setImage(image).build();

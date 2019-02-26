@@ -50,6 +50,7 @@
                         android:textSize="24sp"
                         android:textColor="@color/light"
                         android:text="Light"
+                        android:checked="true"
                         android:onClick="onRadioButtonClicked"/>
 
             </RadioGroup>

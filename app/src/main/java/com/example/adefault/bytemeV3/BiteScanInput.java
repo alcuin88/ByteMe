@@ -6,15 +6,26 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.adefault.bytemeV3.Adapters.SignsSpinnerAdapter;
+import com.example.adefault.bytemeV3.databaseObjects.SignsResponse;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class BiteScanInput extends AppCompatActivity {
 
@@ -23,6 +34,10 @@ public class BiteScanInput extends AppCompatActivity {
     private static Bitmap[] result = new Bitmap[5];
     private ImageView selectedImage;
     private Button scanInsectBite, uploadImage, process;
+    private Spinner spinner;
+    private ArrayList<SignsResponse> signsResponses;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +49,33 @@ public class BiteScanInput extends AppCompatActivity {
         scanInsectBite.setOnClickListener(ClickListener);
         uploadImage.setOnClickListener(ClickListener);
         process.setOnClickListener(ClickListener);
+        populateSignsSpinner();
+    }
+
+    public void populateSignsSpinner(){
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Signs");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                signsResponses = new ArrayList<>();
+                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                    SignsResponse value = dataSnapshot1.getValue(SignsResponse.class);
+                    SignsResponse signsResponse = new SignsResponse();
+                    signsResponse.setName(value.getName());
+                    signsResponse.setSelected(false);
+                    signsResponses.add(signsResponse);
+                }
+                SignsSpinnerAdapter myAdapter = new SignsSpinnerAdapter(BiteScanInput.this, 1,
+                        signsResponses);
+                spinner.setAdapter(myAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
     }
 
     private OnClickListener ClickListener = view -> {
@@ -85,7 +127,7 @@ public class BiteScanInput extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmapInsect;
-        int maxSize = 50;
+        int maxSize = 500;
         if(requestCode == 0&& resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             assert extras != null;
@@ -132,5 +174,7 @@ public class BiteScanInput extends AppCompatActivity {
         process = findViewById(R.id.process);
         modelID = getResources().getString(R.string.bite_model);
         projectID = getResources().getString(R.string.proj_id);
+        spinner = findViewById(R.id.spinner);
+        signsResponses = new ArrayList<>();
     }
 }

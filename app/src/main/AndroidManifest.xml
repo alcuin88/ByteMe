@@ -32,7 +32,7 @@
         <activity android:name=".BiteMarkScan" />
         <activity android:name=".InsectScanInput"/>
         <activity android:name=".InsectScan" />
-        <activity android:name=".Result" />
+        <activity android:name=".Treatment" />
         <activity android:name=".ResultPerInsect" />
         <activity android:name=".InsectInformation" />
         <activity android:name=".UserProfile" />
@@ -55,7 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home"></activity>
+        <activity android:name=".Home" />
     </application>
 
 </manifest>
