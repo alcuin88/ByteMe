@@ -35,9 +35,9 @@ public class PredictionProcess {
 
     }
 
-    public static String GetResult(){
-        return displayResult;
-    }
+//    public static String GetResult(){
+//        return displayResult;
+//    }
 
     class LongOperation extends AsyncTask<byte[][], String, String> {
         private Context context;
@@ -156,6 +156,7 @@ public class PredictionProcess {
             getResult();
             head = null;
             Intent scanIntent = new Intent(context, InsectScan.class);
+            scanIntent.putExtra("result", displayResult);
             context.startActivity(scanIntent);
         }
     }

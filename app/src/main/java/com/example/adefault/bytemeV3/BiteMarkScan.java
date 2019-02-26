@@ -14,7 +14,7 @@ public class BiteMarkScan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bite_mark_scan);
         refIDs();
-        result.setText(PredictionProcess.GetResult());
+//        result.setText(PredictionProcess.GetResult());
     }
 
     private void refIDs(){

@@ -24,15 +24,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Login"/>
+        <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".Dashboard" />
         <activity android:name=".ScanModeForm" />
         <activity android:name=".BiteScanInput" />
         <activity android:name=".BiteMarkScan" />
-        <activity android:name=".InsectScanInput"/>
+        <activity android:name=".InsectScanInput" />
         <activity android:name=".InsectScan" />
-        <activity android:name=".Treatment" />
+        <activity android:name=".Treatment"/>
         <activity android:name=".ResultPerInsect" />
         <activity android:name=".InsectInformation" />
         <activity android:name=".UserProfile" />
@@ -40,7 +40,7 @@
         <activity android:name=".About" />
         <activity android:name=".InsectSpeciesList" />
         <activity android:name=".InsectFamilyList"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />

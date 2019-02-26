@@ -1,6 +1,7 @@
 package com.example.adefault.bytemeV3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -49,7 +50,11 @@ public class BugsListAdapter extends
                 .load(bugs.getBugImage())
                 .into(imageView);
 
-        cardView.setOnClickListener(v -> Toast.makeText(context, bugs.getBugName() + "", Toast.LENGTH_SHORT).show());
+        cardView.setOnClickListener(v -> {
+            Intent scanIntent = new Intent(context, InsectScan.class);
+            scanIntent.putExtra("result", bugs.getBugName());
+            context.startActivity(scanIntent);
+        });
     }
 
 

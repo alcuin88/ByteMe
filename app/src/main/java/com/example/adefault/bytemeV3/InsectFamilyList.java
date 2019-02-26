@@ -1,14 +1,22 @@
 package com.example.adefault.bytemeV3;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InsectFamilyList extends AppCompatActivity {
 
@@ -26,6 +36,7 @@ public class InsectFamilyList extends AppCompatActivity {
     private ProgressBar progressBar;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +44,15 @@ public class InsectFamilyList extends AppCompatActivity {
         refIDs();
         init();
         get();
+        search.addTextChangedListener(watchEditText);
     }
 
     public void refIDs(){
         setContentView(R.layout.activity_insect_family_list);
         mBugs = findViewById(R.id.bugs_list);
         progressBar = findViewById(R.id.progress_bar);
+        search = findViewById(R.id.search_text);
+        search.setVisibility(View.GONE);
     }
 
     public void init(){
@@ -60,7 +74,9 @@ public class InsectFamilyList extends AppCompatActivity {
                     response.setBugImage(bugImage);
                     list.add(response);
                 }
-                Display();
+                Display(list);
+                progressBar.setVisibility(View.GONE);
+                search.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -71,11 +87,45 @@ public class InsectFamilyList extends AppCompatActivity {
         });
     }
 
-    public void Display(){
-        progressBar.setVisibility(View.GONE);
-        BugsListAdapter adapter = new BugsListAdapter(list, this);
+    public void Display(List<BugsListResponse> myList){
+        BugsListAdapter adapter = new BugsListAdapter(myList, this);
         RecyclerView.LayoutManager recyce = new GridLayoutManager(this,2);
         mBugs.setLayoutManager(recyce);
         mBugs.setAdapter(adapter);
+    }
+
+    public TextWatcher watchEditText = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            List<BugsListResponse> newList = null;
+            newList  =
+                    Lists.newArrayList(Collections2.filter(list,
+                            new ListFilter(s.toString().toUpperCase())));
+            Display(newList);
+        }
+    };
+
+    public final class ListFilter implements Predicate<BugsListResponse>{
+        private final Pattern pattern;
+
+        public ListFilter(final String regex){
+            pattern = Pattern.compile(regex);
+        }
+
+        @Override
+        public boolean apply(final BugsListResponse input)
+        {
+            return pattern.matcher(input.getBugName().toUpperCase()).find();
+        }
     }
 }

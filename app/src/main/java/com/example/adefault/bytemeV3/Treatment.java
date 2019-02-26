@@ -28,6 +28,7 @@ public class Treatment extends AppCompatActivity {
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
     private String bugType;
+    private String Type;
     private FirebaseDatabase database;
     private DatabaseReference myRef1, myRef2;
 
@@ -42,8 +43,9 @@ public class Treatment extends AppCompatActivity {
         setContentView(R.layout.activity_treatment);
         Intent intent = getIntent();
 
-        Toast.makeText(this, intent.getStringExtra("bugKey") + "", Toast.LENGTH_SHORT).show();
         bugType = intent.getStringExtra("bugKey");
+        Type = intent.getStringExtra("type");
+
         init();
         getValues();
         refIDs();
@@ -69,8 +71,8 @@ public class Treatment extends AppCompatActivity {
 
     public void init(){
         database = FirebaseDatabase.getInstance();
-        myRef1 = database.getReference("Bugs_List_V1").child(bugType).child("Treatment");
-        myRef2 = database.getReference("Bugs_List_V1").child(bugType).child("Treatment").child("Steps");
+        myRef1 = database.getReference("Bugs_List_V1").child(bugType).child(Type);
+        myRef2 = database.getReference("Bugs_List_V1").child(bugType).child(Type).child("Steps");
     }
 
     public void getValues(){
