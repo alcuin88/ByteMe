@@ -2,9 +2,7 @@ package com.example.adefault.bytemeV3;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 
 public class NavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +22,7 @@ public class NavDrawer extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar = null;
+    AdView mAdview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,12 @@ public class NavDrawer extends AppCompatActivity
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        mAdview = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("42367EBF74D6DF0D092C50CA05C7B684").build();
+        mAdview.loadAd(adRequest);
     }
 
     @Override
@@ -64,7 +73,10 @@ public class NavDrawer extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent logOutIntent = new Intent(NavDrawer.this, Login.class);
+            logOutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(logOutIntent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -78,10 +90,6 @@ public class NavDrawer extends AppCompatActivity
 
        switch (id) {
             // Handle the camera action
-           case R.id.nav_home:
-               Intent h = new Intent(NavDrawer.this, Home.class);
-               startActivity(h);
-               break;
 
            case R.id.nav_scan:
                Intent sc = new Intent(NavDrawer.this, ScanModeForm.class);
@@ -107,7 +115,6 @@ public class NavDrawer extends AppCompatActivity
                Intent a = new Intent(NavDrawer.this, About.class);
                startActivity(a);
                break;
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
