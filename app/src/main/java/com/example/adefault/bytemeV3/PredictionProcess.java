@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.example.adefault.bytemeV3.Nodes.SignsAndSymptomsNode;
+import com.example.adefault.bytemeV3.databaseObjects.BugsListResponseV1;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.automl.v1beta1.AnnotationPayload;
@@ -17,27 +20,36 @@ import com.google.cloud.automl.v1beta1.PredictionServiceSettings;
 import com.google.protobuf.ByteString;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PredictionProcess {
+
+    private static final String TAG = "PredictionProcess";
     private static String displayResult = "";
     private GoogleCredentials credentials;
     private String modelID;
     private String projectID;
     private InsectNode head;
+    private List<Integer> signs;
+    private List<Integer> symptoms;
+    private List<InsectNode> resultList;
+    private List<BugsListResponseV1> list;
 
-    public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials, String modelID, String projectID){
+    public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials,
+                     String modelID, String projectID, List<Integer> signs, List<Integer> symptoms,
+                     List<BugsListResponseV1> list){
         this.credentials = credentials;
         this.modelID = modelID;
         this.projectID = projectID;
+        this.signs = signs;
+        this.symptoms = symptoms;
+        this.list = list;
+        resultList = new ArrayList<>();
         new LongOperation(context).execute(imageBytes);
-
     }
-
-//    public static String GetResult(){
-//        return displayResult;
-//    }
 
     class LongOperation extends AsyncTask<byte[][], String, String> {
         private Context context;
@@ -62,14 +74,14 @@ public class PredictionProcess {
                 e.printStackTrace();
             }
 
-            for(int i = 0; i < 3; i++){
+            for(int i = 0; i < bytes.length; i++){
                 ModelName name = ModelName.of(projectID, "us-central1", modelID);
                 ByteString content = ByteString.copyFrom(bytes[0][i]);
                 Image image = Image.newBuilder().setImageBytes(content).build();
                 ExamplePayload examplePayload = ExamplePayload.newBuilder().setImage(image).build();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("score_threshold", "0.70");
+                params.put("score_threshold", "0.50");
                 PredictResponse response = predictionClient.predict(name, examplePayload, params);
 
 
@@ -117,13 +129,30 @@ public class PredictionProcess {
             int divider = 0;
             float confidence = 0;
             String insectName = "";
+            List<SignsAndSymptomsNode> signsScore;
+            List<SignsAndSymptomsNode> symptomsScore;
+            List<SignsAndSymptomsNode> signsAndSymptomsFinalList = new ArrayList<>();
+
             InsectNode temp;
-            for(temp = head; temp != null; temp = temp.GetNexLink())
+            for(temp = head; temp != null; temp = temp.GetNexLink())    //Get divider
                 if(temp.GetCount() > divider)
                     divider = temp.GetCount();
 
             for(temp = head; temp != null; temp = temp.GetNexLink())
-                temp.SetConfidence(temp.GetConfidence()/divider);
+                temp.SetConfidence(temp.GetConfidence()/divider);       //Get percentage of confidence
+
+            if(signs != null || symptoms != null){
+                if(signs != null){
+                    signsScore = getScores(1);                                  //Get signs score
+                    signsAndSymptomsFinalList = combineSignsAndSymptoms(signsAndSymptomsFinalList, signsScore);         //add signs to signsAndSymptomsFinalList
+                }
+                if(symptoms != null){
+                    symptomsScore = getScores(2);                               //Get symptoms score
+                    signsAndSymptomsFinalList = combineSignsAndSymptoms(signsAndSymptomsFinalList, symptomsScore);      //add symptoms to signsAndSymptomsFinalList
+                }
+                signsAndSymptomsFinalList = getAverage(signsAndSymptomsFinalList);                                  //Get avergage of all scores
+                Toast.makeText(context, signsAndSymptomsFinalList + "", Toast.LENGTH_SHORT).show();
+            }
 
             for(temp = head; temp != null; temp = temp.GetNexLink()){
                 if(confidence == 0 || temp.GetConfidence() > confidence){
@@ -135,6 +164,83 @@ public class PredictionProcess {
             displayResult = insectName;
             if(confidence == 0 && insectName.equalsIgnoreCase(""))
                 displayResult = "No Results Found.";
+        }
+
+        private List<SignsAndSymptomsNode> getAverage(List<SignsAndSymptomsNode> finalList){
+            int high = 0;
+            for(int i = 0; i < finalList.size(); i++){
+                if(finalList.get(i).getOccr() > high)
+                    high = finalList.get(i).getOccr();
+            }
+
+            for(int i = 0; i < finalList.size(); i++)
+                finalList.get(i).setPoints(finalList.get(i).getPoints()/(double)high);
+
+            return finalList;
+        }
+
+        private List<SignsAndSymptomsNode> combineSignsAndSymptoms(List<SignsAndSymptomsNode> finalList, List<SignsAndSymptomsNode> list){
+            boolean found = false;
+            for(int i = 0; i < list.size(); i++)
+                if(finalList.size() == 0)
+                    finalList.add(list.get(i));
+                else{
+                    for(int x = 0; x < finalList.size(); x++){
+                        if(finalList.get(x).getBugName().equalsIgnoreCase(list.get(i).getBugName())){
+                            finalList.get(x).setOccr(finalList.get(x).getOccr() + list.get(i).getOccr());
+                            finalList.get(x).setPoints(finalList.get(x).getPoints() + list.get(i).getPoints());
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(found == false)
+                        finalList.add(list.get(i));
+                    found = false;
+                }
+            return finalList;
+        }
+
+        private List<SignsAndSymptomsNode> getScores(int type){
+            List<SignsAndSymptomsNode> score = new ArrayList<>();
+            int counter = 0;
+
+            if(type == 1){
+                for(int a = 0; a < list.size(); a++){
+                    if(list.get(a).getSigns().size() >= signs.size()){
+                        for(int b = 0; b < signs.size(); b++){
+                            for(int c = 0; c < list.get(a).getSigns().size(); c++){
+                                if(signs.get(b) == list.get(a).getSigns().get(c).getSignsID())
+                                    counter++;
+                            }
+                        }
+                        SignsAndSymptomsNode node = new SignsAndSymptomsNode();
+                        node.setPoints(((double)counter)/(list.get(a).getSigns().size()));
+                        node.setBugName(list.get(a).getBugName());
+                        node.setOccr(1);
+                        score.add(node);
+                    }
+                    counter = 0;
+                }
+            }else{
+                for(int a = 0; a < list.size(); a++){
+                    if(list.get(a).getSymptoms().size() >= symptoms.size()){
+                        for(int b = 0; b < symptoms.size(); b++){
+                            for(int c = 0; c < list.get(a).getSymptoms().size(); c++){
+                                if(symptoms.get(b) == list.get(a).getSymptoms().get(c).getSymptomsID())
+                                    counter++;
+                            }
+                        }
+                        SignsAndSymptomsNode node = new SignsAndSymptomsNode();
+                        node.setPoints(((double)counter)/(list.get(a).getSymptoms().size()));
+                        node.setBugName(list.get(a).getBugName());
+                        node.setOccr(1);
+                        score.add(node);
+                    }
+                    counter = 0;
+                }
+            }
+
+            return score;
         }
 
         @Override
@@ -155,10 +261,9 @@ public class PredictionProcess {
             progressDialog.dismiss();
             getResult();
             head = null;
-            Intent scanIntent = new Intent(context, InsectScan.class);
+            Intent scanIntent = new Intent(context, Result.class);
             scanIntent.putExtra("result", displayResult);
             context.startActivity(scanIntent);
         }
     }
-
 }

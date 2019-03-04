@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.v4.view.ViewPager.*;
+
 public class Treatment extends AppCompatActivity {
 
     private static final String TAG = "Treatment";
@@ -41,15 +43,15 @@ public class Treatment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treatment);
-        Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
 
-        bugType = intent.getStringExtra("bugKey");
-        Type = intent.getStringExtra("type");
+        bugType = bundle.getString("bugKey");
+        Type = bundle.getString("type");
 
         init();
         getValues();
         refIDs();
-        addDotsIndicator();
+
     }
 
     public void refIDs(){
@@ -57,17 +59,43 @@ public class Treatment extends AppCompatActivity {
         mDotLayout = findViewById(R.id.dotsLayout);
     }
 
-    public void addDotsIndicator(){
-        mDots = new TextView[3];
+    public void addDotsIndicator(int position){
+
+        mDots = new TextView[list.size()];
+        mDotLayout.removeAllViews();
+
         for(int i = 0; i < mDots.length; i++){
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.colorWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
 
             mDotLayout.addView(mDots[i]);
         }
+
+        if(mDots.length > 0){
+            mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
+            mDots[position].setTextSize(40);
+            mDots[position].setText(Html.fromHtml("&#8226;"));
+        }
     }
+
+    OnPageChangeListener viewListener = new OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int i, float v, int i1) {
+
+        }
+
+        @Override
+        public void onPageSelected(int i) {
+            addDotsIndicator(i);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+
+        }
+    };
 
     public void init(){
         database = FirebaseDatabase.getInstance();
@@ -92,6 +120,9 @@ public class Treatment extends AppCompatActivity {
                 sliderAdapter = new SliderAdapter(Treatment.this, list);
 
                 mSlideViewPager.setAdapter(sliderAdapter);
+
+                addDotsIndicator(0);
+                mSlideViewPager.addOnPageChangeListener(viewListener);
             }
 
             @Override

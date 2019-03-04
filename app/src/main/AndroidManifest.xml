@@ -23,26 +23,23 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".ScanModeForm" />
         <activity android:name=".BiteScanInput" />
-        <activity android:name=".BiteMarkScan" />
         <activity android:name=".InsectScanInput" />
-        <activity android:name=".InsectScan" />
-        <activity android:name=".Treatment"/>
+        <activity android:name=".Result"/>
+        <activity android:name=".Treatment" />
         <activity android:name=".ResultPerInsect" />
-        <activity android:name=".InsectInformation" />
         <activity android:name=".UserProfile" />
         <activity android:name=".Settings" />
         <activity android:name=".About" />
         <activity android:name=".InsectSpeciesList" />
-        <activity android:name=".InsectFamilyList"/>
+        <activity android:name=".InsectFamilyList" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />

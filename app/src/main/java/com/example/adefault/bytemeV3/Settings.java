@@ -1,6 +1,9 @@
 package com.example.adefault.bytemeV3;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,11 +33,13 @@ public class Settings extends AppCompatActivity {
     private Button save, cancel;
     private int themeID;
     private ConstraintLayout settingsLayout;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        
         refIDs();
         populateFontStyle();
         populateFontSize();
@@ -90,6 +95,10 @@ public class Settings extends AppCompatActivity {
         switch (v.getId()){
             case R.id.save:
                 toggleTheme();
+                backIntent = new Intent(v.getContext(), NavDrawer.class);
+                backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(backIntent);
+                finish();
                 break;
             case R.id.cancel:
                 backIntent = new Intent(v.getContext(), NavDrawer.class);
@@ -130,6 +139,7 @@ public class Settings extends AppCompatActivity {
         fontSizeSpinner.setAdapter(adapter);
     }
 
+    @SuppressLint("CommitPrefEdits")
     private void refIDs(){
         fontStyleSpinner = findViewById(R.id.fontStyle_spinner);
         fontSizeSpinner = findViewById(R.id.fontSize_spinner);
@@ -137,23 +147,33 @@ public class Settings extends AppCompatActivity {
         save = findViewById(R.id.save);
         cancel = findViewById(R.id.cancel);
         settingsLayout = findViewById(R.id.settings_layout);
+        SharedPreferences prefs = getSharedPreferences("Background", Context.MODE_PRIVATE);
+        editor = prefs.edit();
     }
 
     private void toggleTheme(){
         if(themeID == R.id.vampire_radioButton){
-            themeTextView.setTextColor(getResources().getColor(R.color.light));
-            settingsLayout.setBackgroundColor(getResources().getColor(R.color.vampire));
-            fontStyleSpinner.setBackgroundColor(getResources().getColor(R.color.vampire));
-            fontSizeSpinner.setBackgroundColor(getResources().getColor(R.color.vampire));
+            editor.putInt("background", getResources().getColor(R.color.vampire));
+            editor.commit();
         }else{
-            themeTextView.setTextColor(getResources().getColor(R.color.vampire));
-            settingsLayout.setBackgroundColor(getResources().getColor(R.color.light));
-            fontStyleSpinner.setBackgroundColor(getResources().getColor(R.color.light));
-            fontSizeSpinner.setBackgroundColor(getResources().getColor(R.color.light));
+            editor.putInt("background", getResources().getColor(R.color.light));
+            editor.commit();
         }
-        themeTextView.setTextSize(fontSize);
-        themeTextView.setFontFeatureSettings(fontStyle);
+
         Toast.makeText(this, "Settings saved.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ConstraintLayout background = findViewById(R.id.settings_layout);
+        SharedPreferences settings = getSharedPreferences("Background", Context.MODE_PRIVATE);
+        if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire)) {
+            background.setBackgroundColor(getResources().getColor(R.color.vampire));
+        }
+        else {
+            background.setBackgroundColor(getResources().getColor(R.color.light));
+        }
     }
 }
 

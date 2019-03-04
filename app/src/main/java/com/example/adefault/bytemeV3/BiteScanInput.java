@@ -13,8 +13,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.adefault.bytemeV3.Adapters.SignsSpinnerAdapter;
-import com.example.adefault.bytemeV3.databaseObjects.SignsResponse;
+import com.example.adefault.bytemeV3.Adapters.SignsAndSymptomsSpinnerAdapter;
+import com.example.adefault.bytemeV3.databaseObjects.BugsListResponseV1;
+import com.example.adefault.bytemeV3.databaseObjects.SignAndSymptomsResponse;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,18 +27,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BiteScanInput extends AppCompatActivity {
+
+    private static final String TAG = "BiteScanInput";
 
     private String modelID = "";
     private String projectID;
     private static Bitmap[] result = new Bitmap[5];
     private ImageView selectedImage;
     private Button scanInsectBite, uploadImage, process;
-    private Spinner spinner;
-    private ArrayList<SignsResponse> signsResponses;
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private Spinner[] spinner;
+    private ArrayList<SignAndSymptomsResponse> signsResponses;
+    private String[] type;
+    private List<Integer> signs;
+    private List<Integer> symptoms;
+    private List<BugsListResponseV1> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,30 +51,44 @@ public class BiteScanInput extends AppCompatActivity {
         setContentView(R.layout.activity_bite_scan_input);
 
         refIDs();
+        getSignsAndSymptoms();
 
         scanInsectBite.setOnClickListener(ClickListener);
         uploadImage.setOnClickListener(ClickListener);
         process.setOnClickListener(ClickListener);
-        populateSignsSpinner();
+
+        for(int i = 0; i < spinner.length; i++)
+            populateSignsSpinner(i);
     }
 
-    public void populateSignsSpinner(){
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Signs");
+    public void populateSignsSpinner(int index){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(type[index]);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 signsResponses = new ArrayList<>();
+                SignAndSymptomsResponse signsResponse = new SignAndSymptomsResponse();
+                if(index == 0)
+                    signsResponse.setName("SELECT SIGNS");
+                else
+                    signsResponse.setName("SELECT SYMPTOMS");
+                signsResponse.setSelected(false);
+                signsResponse.setID("0");
+                signsResponses.add(signsResponse);
+
+
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    SignsResponse value = dataSnapshot1.getValue(SignsResponse.class);
-                    SignsResponse signsResponse = new SignsResponse();
+                    SignAndSymptomsResponse value = dataSnapshot1.getValue(SignAndSymptomsResponse.class);
+                    signsResponse = new SignAndSymptomsResponse();
+                    signsResponse.setID(dataSnapshot1.getKey());
                     signsResponse.setName(value.getName());
                     signsResponse.setSelected(false);
                     signsResponses.add(signsResponse);
                 }
-                SignsSpinnerAdapter myAdapter = new SignsSpinnerAdapter(BiteScanInput.this, 1,
-                        signsResponses);
-                spinner.setAdapter(myAdapter);
+                SignsAndSymptomsSpinnerAdapter myAdapter = new SignsAndSymptomsSpinnerAdapter(BiteScanInput.this, 1,
+                        signsResponses, BiteScanInput.this);
+                spinner[index].setAdapter(myAdapter);
             }
 
             @Override
@@ -96,7 +116,7 @@ public class BiteScanInput extends AppCompatActivity {
                     byteArray[i] = byteArrayOutputStream.toByteArray();
                 }
                 PredictionProcess process = new PredictionProcess();
-                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID);
+                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID, signs, symptoms, list);
                 break;
         }
     };
@@ -121,6 +141,14 @@ public class BiteScanInput extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, 0);
         }
+    }
+
+    public void setSignsList(List<Integer> signs){
+        this.signs = signs;
+    }
+
+    public void setSymptomsList(List<Integer> symptoms){
+        this.symptoms = symptoms;
     }
 
     @Override
@@ -167,6 +195,37 @@ public class BiteScanInput extends AppCompatActivity {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
+    private void getSignsAndSymptoms(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Bugs_List_V1");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                list = new ArrayList<>();
+                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                    BugsListResponseV1 value = dataSnapshot1.getValue(BugsListResponseV1.class);
+                    BugsListResponseV1 response = new BugsListResponseV1();
+
+                    response.setBugImage(value.getBugImage());
+                    response.setBugName(value.getBugName());
+//                    response.setDescription(value.getDescription());
+//                    response.setSigns(value.getSigns());
+//                    response.setSymptoms(value.getSymptoms());
+//                    response.setTreatment(value.getTreatment());
+
+                    list.add(response);
+                }
+                Toast.makeText(BiteScanInput.this, "List size: " + list.size() , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
     private void refIDs(){
         scanInsectBite = findViewById(R.id.scanBiteButton);
         selectedImage = findViewById(R.id.biteImage);
@@ -174,7 +233,11 @@ public class BiteScanInput extends AppCompatActivity {
         process = findViewById(R.id.process);
         modelID = getResources().getString(R.string.bite_model);
         projectID = getResources().getString(R.string.proj_id);
-        spinner = findViewById(R.id.spinner);
+        spinner = new Spinner[]{
+            findViewById(R.id.spinner),
+            findViewById(R.id.spinner2)
+        };
         signsResponses = new ArrayList<>();
+        type = new String[]{"Signs", "Symptoms"};
     }
 }

@@ -211,7 +211,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             showNearest();
     }
 
-    private void getNearestPestControl(){
+    private void getNearestPestControl(){       //Ka 1 ra ni tawgon, pag open ra sa map.
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("PestControlServices");
 
@@ -228,7 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     response.setName(name);
                     response.setLatitude(latitude);
                     response.setLongitude(longitude);
-                    list.add(response);
+                    list.add(response);             //Pag store tanan details sa pest control services
                 }
                 showNearest();
             }

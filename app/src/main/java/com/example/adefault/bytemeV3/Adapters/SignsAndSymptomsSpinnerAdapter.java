@@ -6,26 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.adefault.bytemeV3.BiteScanInput;
 import com.example.adefault.bytemeV3.R;
-import com.example.adefault.bytemeV3.databaseObjects.SignsResponse;
+import com.example.adefault.bytemeV3.databaseObjects.SignAndSymptomsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignsSpinnerAdapter extends ArrayAdapter<SignsResponse> {
+public class SignsAndSymptomsSpinnerAdapter extends ArrayAdapter<SignAndSymptomsResponse> {
     private Context mContext;
-    private ArrayList<SignsResponse> listState;
-    private SignsSpinnerAdapter myAdapter;
+    private ArrayList<SignAndSymptomsResponse> listState;
+    private SignsAndSymptomsSpinnerAdapter myAdapter;
     private boolean isFromView = false;
+    private List<Integer> list;
+    BiteScanInput biteScanInput;
 
-    public SignsSpinnerAdapter(Context context, int resource, List<SignsResponse> objects) {
+    public SignsAndSymptomsSpinnerAdapter(Context context, int resource, List<SignAndSymptomsResponse> objects, BiteScanInput biteScanInput) {
         super(context, resource, objects);
         this.mContext = context;
-        this.listState = (ArrayList<SignsResponse>) objects;
+        this.listState = (ArrayList<SignAndSymptomsResponse>) objects;
         this.myAdapter = this;
+        list = new ArrayList<>();
+        this.biteScanInput = biteScanInput;
     }
 
     @Override
@@ -67,15 +72,26 @@ public class SignsSpinnerAdapter extends ArrayAdapter<SignsResponse> {
         } else {
             holder.mCheckBox.setVisibility(View.VISIBLE);
         }
+
         holder.mCheckBox.setTag(position);
         holder.mCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             int getPosition = (Integer) buttonView.getTag();
-
             if (!isFromView) {
                 listState.get(position).setSelected(isChecked);
+                if(listState.get(position).isSelected()){
+                    list.add(Integer.valueOf(listState.get(position).getID()));
+                }else{
+                    list.remove(new Integer(Integer.valueOf(listState.get(position).getID())));
+                }
+                biteScanInput.setSignsList(list);
+                Toast.makeText(mContext, list + "", Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
+    }
+
+    public List<Integer> getList(){
+        return list;
     }
 
     private class ViewHolder {

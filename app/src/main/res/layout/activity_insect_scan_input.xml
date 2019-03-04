@@ -42,7 +42,7 @@
                 android:layout_width="141dp"
                 android:layout_height="56dp"
                 android:background="@drawable/signinroundbutton"
-                android:text="Upload Image"
+                android:text="Open Gallery"
                 android:textColor="#ffff"
                 android:layout_marginLeft="20dp"
                 android:textSize="15dp"

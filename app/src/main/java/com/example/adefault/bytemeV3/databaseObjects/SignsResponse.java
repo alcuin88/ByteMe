@@ -1,22 +1,16 @@
 package com.example.adefault.bytemeV3.databaseObjects;
 
 public class SignsResponse {
-    private String Name;
-    private boolean selected;
 
-    public String getName() {
-        return Name;
+    private int SignsID;
+
+    public SignsResponse(){}
+
+    public int getSignsID() {
+        return SignsID;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setSignsID(int signsID) {
+        SignsID = signsID;
     }
 }

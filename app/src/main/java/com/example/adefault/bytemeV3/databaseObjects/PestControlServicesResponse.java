@@ -1,4 +1,4 @@
-package com.example.adefault.bytemeV3;
+package com.example.adefault.bytemeV3.databaseObjects;
 
 import com.google.android.gms.maps.model.LatLng;
 

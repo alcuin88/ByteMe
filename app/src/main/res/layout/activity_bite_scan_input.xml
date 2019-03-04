@@ -31,7 +31,7 @@
                 android:layout_width="141dp"
                 android:layout_height="56dp"
                 android:background="@drawable/signinroundbutton"
-                android:text="Scan Insect"
+                android:text="Scan Bite"
                 android:textColor="#ffff"
                 android:layout_marginRight="20dp"
                 android:textSize="15dp"
@@ -42,7 +42,7 @@
                 android:layout_width="141dp"
                 android:layout_height="56dp"
                 android:background="@drawable/signinroundbutton"
-                android:text="Upload Image"
+                android:text="Open Gallery"
                 android:textColor="#ffff"
                 android:layout_marginLeft="20dp"
                 android:textSize="15dp"
@@ -67,7 +67,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Signs: "
@@ -78,7 +78,6 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="24sp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
 
         </LinearLayout>
@@ -90,7 +89,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Symptoms: "
@@ -101,7 +100,6 @@
                 android:id="@+id/spinner2"
                 android:layout_width="match_parent"
                 android:layout_height="24sp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
 
         </LinearLayout>

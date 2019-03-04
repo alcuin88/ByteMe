@@ -1,7 +1,8 @@
-package com.example.adefault.bytemeV3;
+package com.example.adefault.bytemeV3.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.adefault.bytemeV3.R;
+import com.example.adefault.bytemeV3.Result;
+import com.example.adefault.bytemeV3.databaseObjects.BugsListResponseV1;
+
+import java.io.Serializable;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -18,9 +24,9 @@ public class BugsListAdapter extends
         RecyclerView.Adapter<BugsListAdapter.ViewHolder> {
 
     Context context;
-    List<BugsListResponse> mBugsList;
+    List<BugsListResponseV1> mBugsList;
 
-    public BugsListAdapter(List<BugsListResponse> BugsList, Context context) {
+    public BugsListAdapter(List<BugsListResponseV1> BugsList, Context context) {
         mBugsList = BugsList;
         this.context = context;
     }
@@ -37,7 +43,7 @@ public class BugsListAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        BugsListResponse bugs = mBugsList.get(position);
+        BugsListResponseV1 bugs = mBugsList.get(position);
 
         // Set item views based on your views and data model
 
@@ -51,8 +57,8 @@ public class BugsListAdapter extends
                 .into(imageView);
 
         cardView.setOnClickListener(v -> {
-            Intent scanIntent = new Intent(context, InsectScan.class);
-            scanIntent.putExtra("result", bugs.getBugName());
+            Intent scanIntent = new Intent(context, Result.class);
+            scanIntent.putExtra("result", bugs.getKey());
             context.startActivity(scanIntent);
         });
     }

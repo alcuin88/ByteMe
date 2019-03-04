@@ -7,6 +7,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 
+import com.example.adefault.bytemeV3.Adapters.PestControlServicesAdapter;
+import com.example.adefault.bytemeV3.databaseObjects.PestControlServicesResponse;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 

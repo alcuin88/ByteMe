@@ -54,7 +54,7 @@ public class InsectScanInput extends AppCompatActivity {
                     byteArray[i] = byteArrayOutputStream.toByteArray();
                 }
                 PredictionProcess process = new PredictionProcess();
-                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID);
+                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID, null, null, null);
                 break;
         }
     };

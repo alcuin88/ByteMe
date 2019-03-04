@@ -1,8 +1,6 @@
 package com.example.adefault.bytemeV3;
-import android.os.Build;
 import android.os.Bundle;
 
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 
+import com.example.adefault.bytemeV3.Adapters.BugsListAdapter;
+import com.example.adefault.bytemeV3.databaseObjects.BugsListResponseV1;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -32,7 +31,7 @@ public class InsectFamilyList extends AppCompatActivity {
 
     private static final String TAG = "InsectFamilyList";
     private RecyclerView mBugs;
-    private List<BugsListResponse> list;
+    private List<BugsListResponseV1> list;
     private ProgressBar progressBar;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -47,6 +46,11 @@ public class InsectFamilyList extends AppCompatActivity {
         search.addTextChangedListener(watchEditText);
     }
 
+    private void init(){
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Bugs_List_V1");
+    }
+
     public void refIDs(){
         setContentView(R.layout.activity_insect_family_list);
         mBugs = findViewById(R.id.bugs_list);
@@ -55,28 +59,29 @@ public class InsectFamilyList extends AppCompatActivity {
         search.setVisibility(View.GONE);
     }
 
-    public void init(){
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Bugs_List");
-    }
-
     public void get(){
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 list = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    BugsListResponse value = dataSnapshot1.getValue(BugsListResponse.class);
-                    BugsListResponse response = new BugsListResponse();
-                    String bugName = value.getBugName();
-                    String bugImage = value.getBugImage();
-                    response.setBugName(bugName);
-                    response.setBugImage(bugImage);
+                    BugsListResponseV1 value = dataSnapshot1.getValue(BugsListResponseV1.class);
+                    BugsListResponseV1 response = new BugsListResponseV1();
+
+                    response.setKey(dataSnapshot1.getKey());
+                    response.setBugName(value.getBugName());
+                    response.setBugImage(value.getBugImage());
+                    response.setDescription(value.getDescription());
+                    response.setSigns(value.getSigns());
+                    response.setSymptoms(value.getSymptoms());
+                    response.setTreatment(value.getTreatment());
+                    response.setGetRid(value.getGetRid());
+
                     list.add(response);
                 }
-                Display(list);
                 progressBar.setVisibility(View.GONE);
                 search.setVisibility(View.VISIBLE);
+                Display(list);
             }
 
             @Override
@@ -87,7 +92,7 @@ public class InsectFamilyList extends AppCompatActivity {
         });
     }
 
-    public void Display(List<BugsListResponse> myList){
+    public void Display(List<BugsListResponseV1> myList){
         BugsListAdapter adapter = new BugsListAdapter(myList, this);
         RecyclerView.LayoutManager recyce = new GridLayoutManager(this,2);
         mBugs.setLayoutManager(recyce);
@@ -107,7 +112,7 @@ public class InsectFamilyList extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            List<BugsListResponse> newList = null;
+            List<BugsListResponseV1> newList = null;
             newList  =
                     Lists.newArrayList(Collections2.filter(list,
                             new ListFilter(s.toString().toUpperCase())));
@@ -115,7 +120,7 @@ public class InsectFamilyList extends AppCompatActivity {
         }
     };
 
-    public final class ListFilter implements Predicate<BugsListResponse>{
+    public final class ListFilter implements Predicate<BugsListResponseV1>{
         private final Pattern pattern;
 
         public ListFilter(final String regex){
@@ -123,7 +128,7 @@ public class InsectFamilyList extends AppCompatActivity {
         }
 
         @Override
-        public boolean apply(final BugsListResponse input)
+        public boolean apply(final BugsListResponseV1 input)
         {
             return pattern.matcher(input.getBugName().toUpperCase()).find();
         }

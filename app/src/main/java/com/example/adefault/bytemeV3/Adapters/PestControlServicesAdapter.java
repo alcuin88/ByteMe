@@ -1,4 +1,4 @@
-package com.example.adefault.bytemeV3;
+package com.example.adefault.bytemeV3.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adefault.bytemeV3.DownloadUrl;
+import com.example.adefault.bytemeV3.MapsActivity;
+import com.example.adefault.bytemeV3.databaseObjects.PestControlServicesResponse;
+import com.example.adefault.bytemeV3.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;

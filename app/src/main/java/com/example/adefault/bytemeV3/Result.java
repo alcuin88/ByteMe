@@ -1,42 +1,43 @@
 package com.example.adefault.bytemeV3;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.*;
 
-public class InsectScan extends AppCompatActivity {
+public class Result extends AppCompatActivity {
 
     private TextView result, bugDescription;
     private CircleImageView bugImage;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private String scanResult;
-    private String bugID;
     private Button maps, getRid, treatment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insect_scan);
+        setContentView(R.layout.activity_result);
+        Bundle bundle = getIntent().getExtras();
+        scanResult = bundle.getString("result");
+
         refIDs();
-//        scanResult = PredictionProcess.GetResult();
-        Intent intent = getIntent();
-        scanResult = intent.getStringExtra("result");
         if(!scanResult.equalsIgnoreCase("No Results Found.")){
             getImage();
             treatment.setOnClickListener(clickListener);
@@ -66,19 +67,10 @@ public class InsectScan extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
-    private void showSystemUI() {
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
-
-
     private OnClickListener clickListener = v -> {
         if(v.getId() == R.id.first_aid){
             Intent treatmentIntent = new Intent(v.getContext(), Treatment.class);
-            treatmentIntent.putExtra("bugKey", bugID);
+            treatmentIntent.putExtra("bugKey", scanResult);
             treatmentIntent.putExtra("type", "Treatment");
             startActivity(treatmentIntent);
         }else if(v.getId() == R.id.map_button){
@@ -86,7 +78,7 @@ public class InsectScan extends AppCompatActivity {
             startActivity(mapIntent);
         }else if(v.getId() == R.id.get_rid){
             Intent treatmentIntent = new Intent(v.getContext(), Treatment.class);
-            treatmentIntent.putExtra("bugKey", bugID);
+            treatmentIntent.putExtra("bugKey", scanResult);
             treatmentIntent.putExtra("type", "GetRid");
             startActivity(treatmentIntent);
         }
@@ -97,7 +89,7 @@ public class InsectScan extends AppCompatActivity {
         result = findViewById(R.id.result);
         bugDescription = findViewById(R.id.bug_description);
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Bugs_List");
+        myRef = database.getReference("Bugs_List_V1");
         treatment = findViewById(R.id.first_aid);
         maps = findViewById(R.id.map_button);
         getRid = findViewById(R.id.get_rid);
@@ -106,24 +98,22 @@ public class InsectScan extends AppCompatActivity {
     private void getImage(){
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    BugsListResponse value = dataSnapshot1.getValue(BugsListResponse.class);
-                    if(value.getBugName().trim().replaceAll("\\s+","").equalsIgnoreCase(scanResult.trim().replaceAll("\\s+",""))){
-                        result.setText(value.getBugName());
-                        Glide.with(InsectScan.this)
-                                .load(value.getBugImage())
+                    if(dataSnapshot1.getKey().equalsIgnoreCase(scanResult)){
+                        result.setText(dataSnapshot1.child("BugName").getValue().toString());
+                        Glide.with(Result.this)
+                                .load(dataSnapshot1.child("BugImage").getValue().toString())
                                 .into(bugImage);
-                        bugID = dataSnapshot1.getKey();
-                        bugDescription.setText(value.getHomeTreatment());
+                        bugDescription.setText(dataSnapshot1.child("Description").getValue().toString());
                         break;
                     }
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

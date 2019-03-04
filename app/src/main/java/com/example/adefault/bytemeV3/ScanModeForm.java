@@ -1,10 +1,14 @@
 package com.example.adefault.bytemeV3;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class ScanModeForm extends AppCompatActivity {
 
@@ -46,5 +50,16 @@ public class ScanModeForm extends AppCompatActivity {
         byBite = findViewById(R.id.byBiteButton);
         byInsect = findViewById(R.id.byInsectButton);
         back = findViewById(R.id.backButton);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ConstraintLayout background = findViewById(R.id.rootLayout);
+        SharedPreferences settings = getSharedPreferences("Background", Context.MODE_PRIVATE);
+        if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire))
+            background.setBackgroundColor(getResources().getColor(R.color.vampire));
+        else
+            background.setBackgroundColor(getResources().getColor(R.color.light));
     }
 }
