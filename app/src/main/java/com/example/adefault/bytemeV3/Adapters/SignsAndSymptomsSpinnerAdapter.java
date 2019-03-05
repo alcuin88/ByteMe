@@ -24,7 +24,8 @@ public class SignsAndSymptomsSpinnerAdapter extends ArrayAdapter<SignAndSymptoms
     private List<Integer> list;
     BiteScanInput biteScanInput;
 
-    public SignsAndSymptomsSpinnerAdapter(Context context, int resource, List<SignAndSymptomsResponse> objects, BiteScanInput biteScanInput) {
+    public SignsAndSymptomsSpinnerAdapter(Context context, int resource,
+                                          List<SignAndSymptomsResponse> objects, BiteScanInput biteScanInput) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<SignAndSymptomsResponse>) objects;
@@ -83,8 +84,10 @@ public class SignsAndSymptomsSpinnerAdapter extends ArrayAdapter<SignAndSymptoms
                 }else{
                     list.remove(new Integer(Integer.valueOf(listState.get(position).getID())));
                 }
-                biteScanInput.setSignsList(list);
-                Toast.makeText(mContext, list + "", Toast.LENGTH_SHORT).show();
+                if(listState.get(0).getName().equalsIgnoreCase("SELECT SIGNS"))
+                    biteScanInput.setSignsList(list);
+                else
+                    biteScanInput.setSymptomsList(list);
             }
         });
         return convertView;

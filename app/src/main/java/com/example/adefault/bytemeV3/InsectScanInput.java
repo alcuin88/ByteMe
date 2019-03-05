@@ -48,7 +48,7 @@ public class InsectScanInput extends AppCompatActivity {
 
             case R.id.process:
                 byte[][] byteArray = new byte[3][];
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 1; i++){
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byteArray[i] = byteArrayOutputStream.toByteArray();
@@ -92,7 +92,7 @@ public class InsectScanInput extends AppCompatActivity {
             bitmapInsect = (Bitmap) extras.get("data");
             selectedImage.setImageBitmap(bitmapInsect);
             bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 1; i++)
                 result[i] = bitmapInsect;
         }
         else if (requestCode == 1&& resultCode == RESULT_OK){
@@ -101,7 +101,7 @@ public class InsectScanInput extends AppCompatActivity {
                 selectedImage.setImageURI(imageUri);
                 bitmapInsect = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < 1; i++)
                     result[i] = bitmapInsect;
             } catch (IOException e) {
                 Toast.makeText(this, e + "", Toast.LENGTH_LONG).show();

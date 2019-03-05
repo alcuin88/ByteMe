@@ -2,7 +2,7 @@ package com.example.adefault.bytemeV3;
 
 class InsectNode {
     private String insectName;
-    private float confidence;
+    private double confidence;
     private int counter;
     private InsectNode next;
 
@@ -17,7 +17,7 @@ class InsectNode {
         return insectName;
     }
 
-    float GetConfidence(){
+    double GetConfidence(){
         return confidence;
     }
 
@@ -33,7 +33,7 @@ class InsectNode {
         this.insectName = insectName;
     }
 
-    void SetConfidence(float confidence){
+    void SetConfidence(double confidence){
         this.confidence = confidence;
     }
 

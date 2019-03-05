@@ -110,7 +110,7 @@ public class BiteScanInput extends AppCompatActivity {
 
             case R.id.process:
                 byte[][] byteArray = new byte[3][];
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 1; i++){
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byteArray[i] = byteArrayOutputStream.toByteArray();
@@ -162,7 +162,7 @@ public class BiteScanInput extends AppCompatActivity {
             bitmapInsect = (Bitmap) extras.get("data");
             selectedImage.setImageBitmap(bitmapInsect);
             bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 1; i++)
                 result[i] = bitmapInsect;
         }
         else if (requestCode == 1&& resultCode == RESULT_OK){
@@ -171,7 +171,7 @@ public class BiteScanInput extends AppCompatActivity {
                 selectedImage.setImageURI(imageUri);
                 bitmapInsect = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < 1; i++)
                     result[i] = bitmapInsect;
             } catch (IOException e) {
                 Toast.makeText(this, e + "", Toast.LENGTH_LONG).show();
@@ -208,14 +208,14 @@ public class BiteScanInput extends AppCompatActivity {
 
                     response.setBugImage(value.getBugImage());
                     response.setBugName(value.getBugName());
-//                    response.setDescription(value.getDescription());
-//                    response.setSigns(value.getSigns());
-//                    response.setSymptoms(value.getSymptoms());
-//                    response.setTreatment(value.getTreatment());
+                    response.setDescription(value.getDescription());
+                    response.setSigns(value.getSigns());
+                    response.setSymptoms(value.getSymptoms());
+                    response.setTreatment(value.getTreatment());
+                    response.setGetRid(value.getGetRid());
 
                     list.add(response);
                 }
-                Toast.makeText(BiteScanInput.this, "List size: " + list.size() , Toast.LENGTH_SHORT).show();
             }
 
             @Override

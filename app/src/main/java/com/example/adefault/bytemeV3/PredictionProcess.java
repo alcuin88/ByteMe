@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.adefault.bytemeV3.Nodes.SignsAndSymptomsNode;
@@ -64,7 +65,7 @@ public class PredictionProcess {
         @Override
         protected String doInBackground(byte[][]... bytes) {
             String result;
-            float confidence;
+            double confidence;
 
             try {
                 PredictionServiceSettings.Builder settingsBuilder = PredictionServiceSettings.newBuilder();
@@ -94,7 +95,7 @@ public class PredictionProcess {
             return null;
         }
 
-        void PushResult(String res, float conf){
+        void PushResult(String res, double conf){
             boolean flag = false;
             InsectNode temp = CreateNode(res, conf);
             if(head == null)
@@ -116,7 +117,7 @@ public class PredictionProcess {
             }
         }
 
-        InsectNode CreateNode(String res, float conf){
+        InsectNode CreateNode(String res, double conf){
             InsectNode temp = new InsectNode();
             temp.SetInsectName(res);
             temp.SetConfidence(conf);
@@ -127,7 +128,7 @@ public class PredictionProcess {
         void getResult(){
             displayResult = "";
             int divider = 0;
-            float confidence = 0;
+            double confidence = 0;
             String insectName = "";
             List<SignsAndSymptomsNode> signsScore;
             List<SignsAndSymptomsNode> symptomsScore;
@@ -151,7 +152,7 @@ public class PredictionProcess {
                     signsAndSymptomsFinalList = combineSignsAndSymptoms(signsAndSymptomsFinalList, symptomsScore);      //add symptoms to signsAndSymptomsFinalList
                 }
                 signsAndSymptomsFinalList = getAverage(signsAndSymptomsFinalList);                                  //Get avergage of all scores
-                Toast.makeText(context, signsAndSymptomsFinalList + "", Toast.LENGTH_SHORT).show();
+                getAverageFromAPIandAlgo(signsAndSymptomsFinalList);
             }
 
             for(temp = head; temp != null; temp = temp.GetNexLink()){
@@ -160,10 +161,23 @@ public class PredictionProcess {
                     insectName = temp.GetInsectName();
                 }
             }
-
+            Toast.makeText(context, "Confidence: " + confidence, Toast.LENGTH_SHORT).show();
             displayResult = insectName;
             if(confidence == 0 && insectName.equalsIgnoreCase(""))
                 displayResult = "No Results Found.";
+        }
+
+        private void getAverageFromAPIandAlgo(List<SignsAndSymptomsNode> signsAndSymptomsFinalList){
+            InsectNode temp;
+            for(temp = head; temp != null; temp = temp.GetNexLink()){
+                for(int i = 0; i < signsAndSymptomsFinalList.size(); i++){
+                    if(temp.GetInsectName().equalsIgnoreCase(signsAndSymptomsFinalList.get(i).getBugName())){
+                        double apiConf = temp.GetConfidence() * 0.60;
+                        double signsAndSymptoms = signsAndSymptomsFinalList.get(i).getPoints() * 0.40;
+                        temp.SetConfidence(apiConf + signsAndSymptoms);
+                    }
+                }
+            }
         }
 
         private List<SignsAndSymptomsNode> getAverage(List<SignsAndSymptomsNode> finalList){
@@ -203,7 +217,7 @@ public class PredictionProcess {
         private List<SignsAndSymptomsNode> getScores(int type){
             List<SignsAndSymptomsNode> score = new ArrayList<>();
             int counter = 0;
-
+            Log.d("Prediction:", "Type: " + type);
             if(type == 1){
                 for(int a = 0; a < list.size(); a++){
                     if(list.get(a).getSigns().size() >= signs.size()){
