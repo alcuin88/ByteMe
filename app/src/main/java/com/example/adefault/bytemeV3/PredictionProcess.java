@@ -33,7 +33,7 @@ public class PredictionProcess {
     private GoogleCredentials credentials;
     private String modelID;
     private String projectID;
-    private InsectNode head;
+    private List<InsectNode> head;
     private List<Integer> signs;
     private List<Integer> symptoms;
     private List<InsectNode> resultList;
@@ -49,6 +49,7 @@ public class PredictionProcess {
         this.symptoms = symptoms;
         this.list = list;
         resultList = new ArrayList<>();
+        head = new ArrayList<>();
         new LongOperation(context).execute(imageBytes);
     }
 
@@ -98,11 +99,11 @@ public class PredictionProcess {
         void PushResult(String res, double conf){
             boolean flag = false;
             InsectNode temp = CreateNode(res, conf);
-            if(head == null)
-                head = temp;
+            if(head.size() == 0)
+                head.add(temp);
             else
             {
-                for(InsectNode temp1 = head; temp1 != null; temp1 = temp1.GetNexLink()){
+                for (InsectNode temp1: head) {
                     if (temp1.GetInsectName().equalsIgnoreCase(res)){
                         temp1.SetConfidence(temp1.GetConfidence() + conf);
                         temp1.SetCounter(temp1.GetCount() + 1);
@@ -111,8 +112,7 @@ public class PredictionProcess {
                     }
                 }
                 if (!flag){
-                    temp.SetNexLink(head);
-                    head = temp;
+                    head.add(temp);
                 }
             }
         }
@@ -134,12 +134,11 @@ public class PredictionProcess {
             List<SignsAndSymptomsNode> symptomsScore;
             List<SignsAndSymptomsNode> signsAndSymptomsFinalList = new ArrayList<>();
 
-            InsectNode temp;
-            for(temp = head; temp != null; temp = temp.GetNexLink())    //Get divider
+            for(InsectNode temp: head)    //Get divider
                 if(temp.GetCount() > divider)
                     divider = temp.GetCount();
 
-            for(temp = head; temp != null; temp = temp.GetNexLink())
+            for(InsectNode temp: head)
                 temp.SetConfidence(temp.GetConfidence()/divider);       //Get percentage of confidence
 
             if(signs != null || symptoms != null){
@@ -154,29 +153,40 @@ public class PredictionProcess {
                 signsAndSymptomsFinalList = getAverage(signsAndSymptomsFinalList);                                  //Get avergage of all scores
                 getAverageFromAPIandAlgo(signsAndSymptomsFinalList);
             }
-
-            for(temp = head; temp != null; temp = temp.GetNexLink()){
+            for(InsectNode temp: head){
                 if(confidence == 0 || temp.GetConfidence() > confidence){
                     confidence = temp.GetConfidence();
                     insectName = temp.GetInsectName();
                 }
             }
-            Toast.makeText(context, "Confidence: " + confidence, Toast.LENGTH_SHORT).show();
+
             displayResult = insectName;
+            if(confidence < 0.70)
+                displayResult = "No Results Found.";
             if(confidence == 0 && insectName.equalsIgnoreCase(""))
                 displayResult = "No Results Found.";
         }
 
         private void getAverageFromAPIandAlgo(List<SignsAndSymptomsNode> signsAndSymptomsFinalList){
-            InsectNode temp;
-            for(temp = head; temp != null; temp = temp.GetNexLink()){
-                for(int i = 0; i < signsAndSymptomsFinalList.size(); i++){
-                    if(temp.GetInsectName().equalsIgnoreCase(signsAndSymptomsFinalList.get(i).getBugName())){
+            boolean found = false;
+            for(SignsAndSymptomsNode list: signsAndSymptomsFinalList){
+                for(InsectNode temp: head){
+                    if(temp.GetInsectName().equalsIgnoreCase(list.getKey())){
                         double apiConf = temp.GetConfidence() * 0.60;
-                        double signsAndSymptoms = signsAndSymptomsFinalList.get(i).getPoints() * 0.40;
+                        double signsAndSymptoms = list.getPoints() * 0.40;
                         temp.SetConfidence(apiConf + signsAndSymptoms);
+                        found = true;
+                        break;
                     }
                 }
+                if(found == false){
+                    InsectNode node = new InsectNode();
+                    double signsAndSymptoms = list.getPoints() * 0.40;
+                    node.SetConfidence(signsAndSymptoms + 0);
+                    node.SetInsectName(list.getBugName());
+                    head.add(node);
+                }
+                found = false;
             }
         }
 
@@ -228,6 +238,7 @@ public class PredictionProcess {
                             }
                         }
                         SignsAndSymptomsNode node = new SignsAndSymptomsNode();
+                        node.setKey(list.get(a).getKey());
                         node.setPoints(((double)counter)/(list.get(a).getSigns().size()));
                         node.setBugName(list.get(a).getBugName());
                         node.setOccr(1);
@@ -245,6 +256,7 @@ public class PredictionProcess {
                             }
                         }
                         SignsAndSymptomsNode node = new SignsAndSymptomsNode();
+                        node.setKey(list.get(a).getKey());
                         node.setPoints(((double)counter)/(list.get(a).getSymptoms().size()));
                         node.setBugName(list.get(a).getBugName());
                         node.setOccr(1);

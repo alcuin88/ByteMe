@@ -206,6 +206,7 @@ public class BiteScanInput extends AppCompatActivity {
                     BugsListResponseV1 value = dataSnapshot1.getValue(BugsListResponseV1.class);
                     BugsListResponseV1 response = new BugsListResponseV1();
 
+                    response.setKey(dataSnapshot1.getKey());
                     response.setBugImage(value.getBugImage());
                     response.setBugName(value.getBugName());
                     response.setDescription(value.getDescription());

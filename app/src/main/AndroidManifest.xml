@@ -30,7 +30,13 @@
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".ScanModeForm" />
-        <activity android:name=".BiteScanInput" />
+        <activity android:name=".BiteScanInput" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".InsectScanInput" />
         <activity android:name=".Result"/>
         <activity android:name=".Treatment" />
@@ -48,11 +54,6 @@
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme" />
         <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Home" />
     </application>
