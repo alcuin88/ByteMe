@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".UserProfile"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -27,35 +28,34 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
+        <activity android:name=".SplashScreen">
+        </activity>
         <activity android:name=".Login" />
+        <activity
+            android:name=".NavDrawer"
+            android:label="@string/title_activity_nav_drawer"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".Home" />
         <activity android:name=".SignUp" />
-        <activity android:name=".ScanModeForm" />
-        <activity android:name=".BiteScanInput" >
+        <activity android:name=".ScanModeForm" >
+
+        </activity>
+        <activity android:name=".BiteScanInput" />
+        <activity android:name=".InsectScanInput" />
+        <activity android:name=".Result" />
+        <activity android:name=".Treatment" />
+        <activity android:name=".Settings" />
+        <activity android:name=".About" />
+        <activity android:name=".InsectFamilyList" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InsectScanInput" />
-        <activity android:name=".Result"/>
-        <activity android:name=".Treatment" />
-        <activity android:name=".ResultPerInsect" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".Settings" />
-        <activity android:name=".About" />
-        <activity android:name=".InsectSpeciesList" />
-        <activity android:name=".InsectFamilyList" />
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".NavDrawer"
-            android:label="@string/title_activity_nav_drawer"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".SplashScreen">
-        </activity>
-        <activity android:name=".Home" />
     </application>
 
 </manifest>

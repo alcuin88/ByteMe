@@ -10,10 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 
 public class NavDrawer extends AppCompatActivity
@@ -21,8 +26,10 @@ public class NavDrawer extends AppCompatActivity
 
     DrawerLayout drawer;
     NavigationView navigationView;
+    LinearLayout navHeader;
     Toolbar toolbar = null;
     AdView mAdview;
+    GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,8 @@ public class NavDrawer extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -75,6 +84,12 @@ public class NavDrawer extends AppCompatActivity
         if (id == R.id.action_settings) {
             Intent logOutIntent = new Intent(NavDrawer.this, Login.class);
             logOutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+            mGoogleSignInClient.signOut();
+            mGoogleSignInClient.revokeAccess();
             startActivity(logOutIntent);
             finish();
         }

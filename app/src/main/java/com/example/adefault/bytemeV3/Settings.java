@@ -154,6 +154,7 @@ public class Settings extends AppCompatActivity {
     private void toggleTheme(){
         if(themeID == R.id.vampire_radioButton){
             editor.putInt("background", getResources().getColor(R.color.vampire));
+
             editor.commit();
         }else{
             editor.putInt("background", getResources().getColor(R.color.light));
@@ -170,6 +171,7 @@ public class Settings extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("Background", Context.MODE_PRIVATE);
         if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire)) {
             background.setBackgroundColor(getResources().getColor(R.color.vampire));
+
         }
         else {
             background.setBackgroundColor(getResources().getColor(R.color.light));

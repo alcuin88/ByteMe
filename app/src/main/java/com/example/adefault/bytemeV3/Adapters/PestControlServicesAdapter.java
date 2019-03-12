@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,17 +36,18 @@ public class PestControlServicesAdapter extends
     private GoogleMap mMap;
     private BottomSheetBehavior bottomSheetBehavior;
     private Button showList;
+    private TextView currentRadius;
 
-    public PestControlServicesAdapter(List<PestControlServicesResponse> PestsList, Context context,
-                                      LatLng orig, GoogleMap mMap, BottomSheetBehavior bottomSheetBehavior,
-                                      Button showList, String API_KEY) {
-        mPestList = PestsList;
-        this.context = context;
-        this.orig = orig;
-        this.mMap = mMap;
-        this.bottomSheetBehavior = bottomSheetBehavior;
-        this.showList = showList;
-        this.API_KEY = API_KEY;
+    public PestControlServicesAdapter(Object[] transferData) {
+        mPestList = (List<PestControlServicesResponse>) transferData[0];
+        context = (Context) transferData[1];
+        orig = (LatLng) transferData[2];
+        mMap = (GoogleMap) transferData[3];
+        mMap.clear();
+        bottomSheetBehavior = (BottomSheetBehavior) transferData[4];
+        showList = (Button) transferData[5];
+        API_KEY = (String) transferData[6];
+        currentRadius = (TextView) transferData[7];
     }
 
     @NonNull
@@ -62,17 +64,21 @@ public class PestControlServicesAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         PestControlServicesResponse pestControlServicesResponse = mPestList.get(position);
 
-        // Set item views based on your views and data model
-
         TextView pestControlName = viewHolder.pestControlName;
         TextView distance = viewHolder.distance;
         TextView duration = viewHolder.duration;
 
         CardView cardView = viewHolder.cardView;
 
+        MarkerOptions options1 = new MarkerOptions()
+                .position(new LatLng(pestControlServicesResponse.getLatLng().latitude, pestControlServicesResponse.getLatLng().longitude))
+                .title(pestControlServicesResponse.getName());
+        mMap.addMarker(options1);
+
         pestControlName.setText(pestControlServicesResponse.getName());
         distance.setText(pestControlServicesResponse.getDistance());
         duration.setText(pestControlServicesResponse.getDuration());
+
 
         cardView.setOnClickListener(v -> {
             mMap.clear();
@@ -83,7 +89,6 @@ public class PestControlServicesAdapter extends
             mMap.addMarker(options);
             nav(pestControlServicesResponse.getLatLng());
         });
-
     }
 
     private void nav(LatLng dest){
@@ -164,7 +169,7 @@ public class PestControlServicesAdapter extends
 
         public ViewHolder(View itemView){
             super(itemView);
-            pestControlName = itemView.findViewById(R.id.pest_service_name);
+            pestControlName = itemView.findViewById(R.id.pest_control_name);
             distance = itemView.findViewById(R.id.distance);
             duration = itemView.findViewById(R.id.duration);
             cardView = itemView.findViewById(R.id.pest_card_view);

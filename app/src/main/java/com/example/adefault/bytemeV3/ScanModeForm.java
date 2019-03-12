@@ -57,9 +57,13 @@ public class ScanModeForm extends AppCompatActivity {
         super.onResume();
         ConstraintLayout background = findViewById(R.id.rootLayout);
         SharedPreferences settings = getSharedPreferences("Background", Context.MODE_PRIVATE);
-        if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire))
+        if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire)) {
             background.setBackgroundColor(getResources().getColor(R.color.vampire));
-        else
+            back.setTextColor(getResources().getColor(R.color.light));
+        }
+        else {
             background.setBackgroundColor(getResources().getColor(R.color.light));
+            back.setTextColor(getResources().getColor(R.color.vampire));
+        }
     }
 }

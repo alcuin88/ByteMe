@@ -5,6 +5,10 @@ public class SignAndSymptomsResponse {
     private boolean selected;
     private String ID;
 
+    public SignAndSymptomsResponse(){
+
+    }
+
     public String getID() {
         return ID;
     }

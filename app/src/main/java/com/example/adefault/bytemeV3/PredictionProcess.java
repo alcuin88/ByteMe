@@ -38,10 +38,11 @@ public class PredictionProcess {
     private List<Integer> symptoms;
     private List<InsectNode> resultList;
     private List<BugsListResponseV1> list;
+    private String THRESHOLD;
 
-    public void main(Context context, byte[][] imageBytes, GoogleCredentials credentials,
+    public void main(Context context, byte[] imageBytes, GoogleCredentials credentials,
                      String modelID, String projectID, List<Integer> signs, List<Integer> symptoms,
-                     List<BugsListResponseV1> list){
+                     List<BugsListResponseV1> list, String THRESHOLD){
         this.credentials = credentials;
         this.modelID = modelID;
         this.projectID = projectID;
@@ -50,10 +51,11 @@ public class PredictionProcess {
         this.list = list;
         resultList = new ArrayList<>();
         head = new ArrayList<>();
+        this.THRESHOLD = THRESHOLD;
         new LongOperation(context).execute(imageBytes);
     }
 
-    class LongOperation extends AsyncTask<byte[][], String, String> {
+    class LongOperation extends AsyncTask<byte[], String, String> {
         private Context context;
         private ProgressDialog progressDialog;
         private PredictionServiceClient predictionClient;
@@ -64,7 +66,7 @@ public class PredictionProcess {
         }
 
         @Override
-        protected String doInBackground(byte[][]... bytes) {
+        protected String doInBackground(byte[]... bytes) {
             String result;
             double confidence;
 
@@ -76,22 +78,20 @@ public class PredictionProcess {
                 e.printStackTrace();
             }
 
-            for(int i = 0; i < bytes.length; i++){
-                ModelName name = ModelName.of(projectID, "us-central1", modelID);
-                ByteString content = ByteString.copyFrom(bytes[0][i]);
-                Image image = Image.newBuilder().setImageBytes(content).build();
-                ExamplePayload examplePayload = ExamplePayload.newBuilder().setImage(image).build();
+            ModelName name = ModelName.of(projectID, "us-central1", modelID);
+            ByteString content = ByteString.copyFrom(bytes[0]);
+            Image image = Image.newBuilder().setImageBytes(content).build();
+            ExamplePayload examplePayload = ExamplePayload.newBuilder().setImage(image).build();
 
-                Map<String, String> params = new HashMap<>();
-                params.put("score_threshold", "0.50");
-                PredictResponse response = predictionClient.predict(name, examplePayload, params);
+            Map<String, String> params = new HashMap<>();
+            params.put("score_threshold", THRESHOLD);
+            PredictResponse response = predictionClient.predict(name, examplePayload, params);
 
 
-                for (AnnotationPayload annotationPayload : response.getPayloadList()) {
-                    result =  annotationPayload.getDisplayName();
-                    confidence =  annotationPayload.getClassification().getScore();
-                    PushResult(result, confidence);
-                }
+            for (AnnotationPayload annotationPayload : response.getPayloadList()) {
+                result =  annotationPayload.getDisplayName();
+                confidence =  annotationPayload.getClassification().getScore();
+                PushResult(result, confidence);
             }
             return null;
         }
@@ -161,7 +161,7 @@ public class PredictionProcess {
             }
 
             displayResult = insectName;
-            if(confidence < 0.70)
+            if(confidence < Double.parseDouble(THRESHOLD))
                 displayResult = "No Results Found.";
             if(confidence == 0 && insectName.equalsIgnoreCase(""))
                 displayResult = "No Results Found.";

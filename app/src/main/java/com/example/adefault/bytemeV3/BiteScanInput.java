@@ -32,10 +32,11 @@ import java.util.List;
 public class BiteScanInput extends AppCompatActivity {
 
     private static final String TAG = "BiteScanInput";
+    private static final String THRESHOLD = "0.30";
 
     private String modelID = "";
     private String projectID;
-    private static Bitmap[] result = new Bitmap[5];
+    private Bitmap result;
     private ImageView selectedImage;
     private Button scanInsectBite, uploadImage, process;
     private Spinner[] spinner;
@@ -56,6 +57,7 @@ public class BiteScanInput extends AppCompatActivity {
         scanInsectBite.setOnClickListener(ClickListener);
         uploadImage.setOnClickListener(ClickListener);
         process.setOnClickListener(ClickListener);
+        process.setEnabled(false);
 
         for(int i = 0; i < spinner.length; i++)
             populateSignsSpinner(i);
@@ -102,21 +104,31 @@ public class BiteScanInput extends AppCompatActivity {
         switch(view.getId()){
             case R.id.scanBiteButton:
                 StartCamera();
+                if(selectedImage.getDrawable() != null){
+                    scanInsectBite.setEnabled(false);
+                    uploadImage.setEnabled(false);
+                    process.setEnabled(true);
+                }
                 break;
 
             case R.id.uploadImage:
                 OpenGallery();
+                if(selectedImage.getDrawable() != null){
+                    scanInsectBite.setEnabled(false);
+                    uploadImage.setEnabled(false);
+                    process.setEnabled(true);
+                }
                 break;
 
             case R.id.process:
-                byte[][] byteArray = new byte[3][];
-                for(int i = 0; i < 1; i++){
+                byte[] byteArray;
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    result[i].compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byteArray[i] = byteArrayOutputStream.toByteArray();
-                }
+                    result.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byteArray = byteArrayOutputStream.toByteArray();
                 PredictionProcess process = new PredictionProcess();
-                process.main(view.getContext(), byteArray, getCredentials(), modelID, projectID, signs, symptoms, list);
+                process.main(view.getContext(), byteArray, getCredentials()
+                        , modelID, projectID, signs, symptoms
+                        , list, THRESHOLD);
                 break;
         }
     };
@@ -161,9 +173,7 @@ public class BiteScanInput extends AppCompatActivity {
             assert extras != null;
             bitmapInsect = (Bitmap) extras.get("data");
             selectedImage.setImageBitmap(bitmapInsect);
-            bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-            for(int i = 0; i < 1; i++)
-                result[i] = bitmapInsect;
+            result = bitmapInsect;
         }
         else if (requestCode == 1&& resultCode == RESULT_OK){
             try {
@@ -171,8 +181,7 @@ public class BiteScanInput extends AppCompatActivity {
                 selectedImage.setImageURI(imageUri);
                 bitmapInsect = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
-                for(int i = 0; i < 1; i++)
-                    result[i] = bitmapInsect;
+                result = bitmapInsect;
             } catch (IOException e) {
                 Toast.makeText(this, e + "", Toast.LENGTH_LONG).show();
             }

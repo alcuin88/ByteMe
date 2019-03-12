@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,12 +35,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,21 +52,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 13f;
+    private static final float DEFAULT_ZOOM = 11f;
 
     private String API_KEY = "";
     private Boolean mLocationPermissionsGranted = false;
-    private static GoogleMap mMap;
-    private static Context context;
-    private List<PestControlServices> list;
-    private LatLng myLocation;
-    private DownloadUrl downloadUrl;
-    private ImageView mGps;
+    private static GoogleMap mMap = null;
+    private static Context context = null;
+    private List<PestControlServices> list = null;
+    private LatLng myLocation = null;
+    private ImageView mGps = null;
 
-    private BottomSheetBehavior bottomSheetBehavior;
-    private Button showList;
-    private View bottomSheet;
-    private RecyclerView mPest;
+    private BottomSheetBehavior bottomSheetBehavior = null;
+    private Button showList = null;
+    private RecyclerView mPest = null;
+    private SeekBar radius = null;
+    private TextView currentRadius = null;
+    GetDirectionsData getDirectionsData = null;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -87,7 +84,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getDeviceLocation();
             });
         }
+
+        radius.setOnSeekBarChangeListener(seekBarChangeListener);
     }
+
+    private SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            currentRadius.setText(progress + " km");
+            getDeviceLocation();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+    };
 
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -111,8 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void refIDs(){
         mGps = findViewById(R.id.ic_gps);
-        downloadUrl = new DownloadUrl();
-        bottomSheet = findViewById(R.id.bottom_sheet);
+        View bottomSheet = findViewById(R.id.bottom_sheet);
         mPest = findViewById(R.id.pest_services_list);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(bottomSheetBehavior.getPeekHeight());
@@ -123,6 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         showList.setOnClickListener(clickListener);
         context = this;
         API_KEY = getResources().getString(R.string.google_maps_key);
+        radius = findViewById(R.id.radius_seekbar);
+        currentRadius = findViewById(R.id.current_radius);
     }
 
     public View.OnClickListener clickListener = v -> {
@@ -167,7 +185,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void getDeviceLocation(){
-        Log.d(TAG, "getDeviceLocation: getting the devices current location");
+        Log.d(TAG, "getDeviceLocation: getting the devices current Location");
 
         FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
@@ -175,19 +193,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        Log.d(TAG, "onComplete: found location");
+                        Log.d(TAG, "onComplete: found Location");
 
                         Location currentLocation = (Location)task.getResult();
                         if(currentLocation != null){
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), "My Location");
                             myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), "My Location");
                         }
                         else
-                            Toast.makeText(this, "Unable to get current location", LENGTH_SHORT).show();
+                            Toast.makeText(this, "Unable to get current Location", LENGTH_SHORT).show();
                     }
                     else{
-                        Log.d(TAG, "onComplete: current location is null");
-                        Toast.makeText(MapsActivity.this, "unable to get current location", LENGTH_SHORT).show();
+                        Log.d(TAG, "onComplete: current Location is null");
+                        Toast.makeText(MapsActivity.this, "unable to get current Location", LENGTH_SHORT).show();
                     }
                 });
             }
@@ -205,51 +223,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .title(title);
             mMap.addMarker(options);
         }
-        if(list == null)
-            getNearestPestControl();
-        else
-            showNearest();
-    }
-
-    private void getNearestPestControl(){       //Ka 1 ra ni tawgon, pag open ra sa map.
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("PestControlServices");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<>();
-                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    PestControlServices value = dataSnapshot1.getValue(PestControlServices.class);
-                    PestControlServices response = new PestControlServices();
-                    String name = Objects.requireNonNull(value).getName();
-                    float latitude = value.getLatitude();
-                    float longitude = value.getLongitude();
-                    response.setName(name);
-                    response.setLatitude(latitude);
-                    response.setLongitude(longitude);
-                    list.add(response);             //Pag store tanan details sa pest control services
-                }
-                showNearest();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+        showNearest();
     }
 
     public void showNearest(){
-        GetDirectionsData getDirectionsData = null;
-        for (PestControlServices myList: list) {
-            MarkerOptions options = new MarkerOptions()
-                    .position(new LatLng(myList.getLatitude(), myList.getLongitude()))
-                    .title(myList.getName());
-            mMap.addMarker(options);
-        }
-        Object[] transferData = new Object[8];
+        Object[] transferData = new Object[10];
         transferData[0] = list;
         transferData[1] = mPest;
         transferData[2] = myLocation;
@@ -258,12 +236,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         transferData[5] = bottomSheetBehavior;
         transferData[6] = showList;
         transferData[7] = API_KEY;
-        getDirectionsData = new GetDirectionsData();
-        getDirectionsData.execute(transferData);
+        transferData[8] = currentRadius;
+        if(getDirectionsData == null) {
+            getDirectionsData = new GetDirectionsData();
+            getDirectionsData.execute(transferData);
+        }
+        else
+            getDirectionsData.Display();
     }
 
     private void getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions");
+        Log.d(TAG, "getLocationPermission: getting Location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 

@@ -8,6 +8,8 @@
     <color name="submit">#fa7898</color>
     <color name="vampire">#262626</color>
     <color name="light">#f2f2f2</color>
+    <color name="grey">#808080</color>
+    <color name="green">#008000</color>
     
     //OnBoarding
     <color name="colorWhite">#FFFFFF</color>

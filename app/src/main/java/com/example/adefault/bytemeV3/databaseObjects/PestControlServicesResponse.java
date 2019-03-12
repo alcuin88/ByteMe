@@ -2,9 +2,20 @@ package com.example.adefault.bytemeV3.databaseObjects;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class PestControlServicesResponse {
+public class PestControlServicesResponse implements Comparable<PestControlServicesResponse> {
     private String name;
     private String distance;
+    private String duration;
+    private LatLng latLng;
+    private boolean opening_hours;
+
+    public boolean isOpening_hours() {
+        return opening_hours;
+    }
+
+    public void setOpening_hours(boolean opening_hours) {
+        this.opening_hours = opening_hours;
+    }
 
     public LatLng getLatLng() {
         return latLng;
@@ -13,8 +24,6 @@ public class PestControlServicesResponse {
     public void setLatLng(LatLng latLng) {
         this.latLng = latLng;
     }
-
-    private LatLng latLng;
 
     public String getDistance() {
         return distance;
@@ -32,13 +41,19 @@ public class PestControlServicesResponse {
         this.duration = duration;
     }
 
-    private String duration;
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(PestControlServicesResponse pest) {
+        if (getDistance() == null || pest.getDistance() == null) {
+            return 0;
+        }
+        return getDistance().compareTo(pest.getDistance());
     }
 }

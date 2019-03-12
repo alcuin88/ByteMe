@@ -1,6 +1,6 @@
 package com.example.adefault.bytemeV3;
 
-public class PestControlServices {
+public class PestControlServices{
     private String name;
     private float latitude;
     private float longitude;
