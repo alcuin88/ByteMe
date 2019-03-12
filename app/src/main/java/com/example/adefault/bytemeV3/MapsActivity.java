@@ -80,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             getLocationPermission();
 
             mGps.setOnClickListener(v -> {
+                showList.setVisibility(View.GONE);
                 mMap.clear();
                 getDeviceLocation();
             });
