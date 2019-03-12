@@ -67,6 +67,7 @@ public class PestControlServicesAdapter extends
         TextView pestControlName = viewHolder.pestControlName;
         TextView distance = viewHolder.distance;
         TextView duration = viewHolder.duration;
+        TextView open_hour = viewHolder.open_hour;
 
         CardView cardView = viewHolder.cardView;
 
@@ -78,6 +79,10 @@ public class PestControlServicesAdapter extends
         pestControlName.setText(pestControlServicesResponse.getName());
         distance.setText(pestControlServicesResponse.getDistance());
         duration.setText(pestControlServicesResponse.getDuration());
+        if(pestControlServicesResponse.isOpening_hours())
+            open_hour.setText("Status:Open");
+        else
+            open_hour.setText("Status:Close");
 
 
         cardView.setOnClickListener(v -> {
@@ -163,6 +168,7 @@ public class PestControlServicesAdapter extends
         public TextView pestControlName;
         public TextView distance;
         public TextView duration;
+        public TextView open_hour;
 
 
         public CardView cardView;
@@ -173,6 +179,7 @@ public class PestControlServicesAdapter extends
             distance = itemView.findViewById(R.id.distance);
             duration = itemView.findViewById(R.id.duration);
             cardView = itemView.findViewById(R.id.pest_card_view);
+            open_hour = itemView.findViewById(R.id.open_hours);
         }
     }
 }

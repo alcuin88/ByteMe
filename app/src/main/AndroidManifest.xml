@@ -29,6 +29,11 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Login" />
         <activity
@@ -49,13 +54,7 @@
         <activity android:name=".InsectFamilyList" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

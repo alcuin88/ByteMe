@@ -120,7 +120,7 @@ public class GetDirectionsData extends AsyncTask<Object, String, String> {
         List<PestControlServicesResponse> newList = new ArrayList<>();
         double radiusLimit = Double.parseDouble(currentRadius.getText().toString().substring(0, currentRadius.getText().toString().length()-3));
         for(int i = 0; i < thisList.size(); i++){
-            double distance = Double.parseDouble(thisList.get(i).getDistance());
+            double distance = Double.parseDouble(thisList.get(i).getDistance().substring(10, thisList.get(i).getDistance().length()-3));
             if(distance <= radiusLimit){
                 newList.add(thisList.get(i));
             }
