@@ -58,7 +58,7 @@ public class BugsListAdapter extends
 
         cardView.setOnClickListener(v -> {
             Intent scanIntent = new Intent(context, Result.class);
-            scanIntent.putExtra("result", bugs.getKey());
+            scanIntent.putExtra("result", bugs.getBugName());
             context.startActivity(scanIntent);
         });
     }

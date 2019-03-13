@@ -10,16 +10,16 @@ public class BugsListResponseV1 {
     private String Description;
     private List<SignsResponse> Signs;
     private List<SymptomsResponse> Symptoms;
-    private List<TreatmentResponse> Treatment;
-    private List<GetRidResponse> GetRid;
+//    private List<TreatmentResponse> Treatment;
+//    private List<GetRidResponse> GetRid;
 
-    public List<GetRidResponse> getGetRid() {
-        return GetRid;
-    }
-
-    public void setGetRid(List<GetRidResponse> getRid) {
-        GetRid = getRid;
-    }
+//    public List<GetRidResponse> getGetRid() {
+//        return GetRid;
+//    }
+//
+//    public void setGetRid(List<GetRidResponse> getRid) {
+//        GetRid = getRid;
+//    }
 
     public BugsListResponseV1(){}
 
@@ -71,11 +71,11 @@ public class BugsListResponseV1 {
         Symptoms = symptoms;
     }
 
-    public List<TreatmentResponse> getTreatment() {
-        return Treatment;
-    }
-
-    public void setTreatment(List<TreatmentResponse> treatment) {
-        Treatment = treatment;
-    }
+//    public List<TreatmentResponse> getTreatment() {
+//        return Treatment;
+//    }
+//
+//    public void setTreatment(List<TreatmentResponse> treatment) {
+//        Treatment = treatment;
+//    }
 }

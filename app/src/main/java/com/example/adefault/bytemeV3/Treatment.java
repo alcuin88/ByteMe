@@ -123,8 +123,8 @@ public class Treatment extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                // Failed to read GeoFenceResponse
+                Log.w(TAG, "Failed to read GeoFenceResponse.", error.toException());
             }
         });
     }

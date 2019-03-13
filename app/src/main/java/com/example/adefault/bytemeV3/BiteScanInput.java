@@ -95,7 +95,7 @@ public class BiteScanInput extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
+                // Failed to read GeoFenceResponse
             }
         });
     }
@@ -221,8 +221,8 @@ public class BiteScanInput extends AppCompatActivity {
                     response.setDescription(value.getDescription());
                     response.setSigns(value.getSigns());
                     response.setSymptoms(value.getSymptoms());
-                    response.setTreatment(value.getTreatment());
-                    response.setGetRid(value.getGetRid());
+//                    response.setTreatment(GeoFenceResponse.getTreatment());
+//                    response.setGetRid(GeoFenceResponse.getGetRid());
 
                     list.add(response);
                 }
@@ -230,8 +230,8 @@ public class BiteScanInput extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                // Failed to read GeoFenceResponse
+                Log.w(TAG, "Failed to read GeoFenceResponse.", error.toException());
             }
         });
     }

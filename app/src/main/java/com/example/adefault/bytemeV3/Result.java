@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.view.View.*;
 
 public class Result extends AppCompatActivity {
+
+    private static final String TAG = "Result";
 
     private TextView result, bugDescription;
     private CircleImageView bugImage;
@@ -94,12 +97,15 @@ public class Result extends AppCompatActivity {
     }
 
     private void getImage(){
+        Log.d(TAG, "GET IMAGE");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
                     String bugName = dataSnapshot1.child("BugName").getValue().toString().replace(" ", "");
-                    if(bugName.equalsIgnoreCase(scanResult)){
+                    String scanRes = scanResult.replace(" ", "");
+                    Log.d(TAG, "COMPARE= " + bugName + " == " + scanResult);
+                    if(bugName.equalsIgnoreCase(scanRes)){
                         key = dataSnapshot1.getKey();
                         result.setText(dataSnapshot1.child("BugName").getValue().toString());
                         Glide.with(Result.this)
