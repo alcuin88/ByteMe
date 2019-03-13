@@ -1,9 +1,7 @@
 package com.example.adefault.bytemeV3;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +25,7 @@ public class Result extends AppCompatActivity {
     private CircleImageView bugImage;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-    private String scanResult;
+    String scanResult, key;
     private Button maps, getRid, treatment;
 
     @Override
@@ -70,7 +68,7 @@ public class Result extends AppCompatActivity {
     private OnClickListener clickListener = v -> {
         if(v.getId() == R.id.first_aid){
             Intent treatmentIntent = new Intent(v.getContext(), Treatment.class);
-            treatmentIntent.putExtra("bugKey", scanResult);
+            treatmentIntent.putExtra("bugKey", key);
             treatmentIntent.putExtra("type", "Treatment");
             startActivity(treatmentIntent);
         }else if(v.getId() == R.id.map_button){
@@ -78,7 +76,7 @@ public class Result extends AppCompatActivity {
             startActivity(mapIntent);
         }else if(v.getId() == R.id.get_rid){
             Intent treatmentIntent = new Intent(v.getContext(), Treatment.class);
-            treatmentIntent.putExtra("bugKey", scanResult);
+            treatmentIntent.putExtra("bugKey", key);
             treatmentIntent.putExtra("type", "GetRid");
             startActivity(treatmentIntent);
         }
@@ -100,7 +98,9 @@ public class Result extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    if(dataSnapshot1.getKey().equalsIgnoreCase(scanResult)){
+                    String bugName = dataSnapshot1.child("BugName").getValue().toString().replace(" ", "");
+                    if(bugName.equalsIgnoreCase(scanResult)){
+                        key = dataSnapshot1.getKey();
                         result.setText(dataSnapshot1.child("BugName").getValue().toString());
                         Glide.with(Result.this)
                                 .load(dataSnapshot1.child("BugImage").getValue().toString())
@@ -116,5 +116,9 @@ public class Result extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveResult(){
+
     }
 }

@@ -29,11 +29,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Login" />
         <activity
@@ -43,7 +39,11 @@
         <activity android:name=".Home" />
         <activity android:name=".SignUp" />
         <activity android:name=".ScanModeForm" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".BiteScanInput" />
         <activity android:name=".InsectScanInput" />

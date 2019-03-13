@@ -1,7 +1,5 @@
 package com.example.adefault.bytemeV3;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +7,6 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.adefault.bytemeV3.databaseObjects.TreatmentResponse;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +29,7 @@ public class Treatment extends AppCompatActivity {
     private String bugType;
     private String Type;
     private FirebaseDatabase database;
-    private DatabaseReference myRef1, myRef2;
+    private DatabaseReference myRef1;
 
     private TextView[] mDots;
 
@@ -100,7 +97,6 @@ public class Treatment extends AppCompatActivity {
     public void init(){
         database = FirebaseDatabase.getInstance();
         myRef1 = database.getReference("Bugs_List_V1").child(bugType).child(Type);
-        myRef2 = database.getReference("Bugs_List_V1").child(bugType).child(Type).child("Steps");
     }
 
     public void getValues(){

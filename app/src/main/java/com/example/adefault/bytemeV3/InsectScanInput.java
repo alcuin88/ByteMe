@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 public class InsectScanInput extends AppCompatActivity {
 
-    private static final String THRESHOLD = "0.50";
+    private static final String THRESHOLD = "0.70";
 
     private String modelID = "";
     private String projectID;
@@ -93,7 +93,7 @@ public class InsectScanInput extends AppCompatActivity {
             assert extras != null;
             bitmapInsect = (Bitmap) extras.get("data");
             selectedImage.setImageBitmap(bitmapInsect);
-//            bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
+            bitmapInsect = getResizedBitmap(bitmapInsect, maxSize);
             result = bitmapInsect;
         }
         else if (requestCode == 1&& resultCode == RESULT_OK){

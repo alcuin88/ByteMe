@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.adefault.bytemeV3.databaseObjects.UserObject;
@@ -32,9 +33,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    EditText username, password;
-    Button signUp, signIn;
-    com.google.android.gms.common.SignInButton googleSignIn;
+    private EditText username, password;
+    private Button signUp, signIn;
+    private com.google.android.gms.common.SignInButton googleSignIn;
 
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
@@ -64,6 +65,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                Intent signInIntent = new Intent(Login.this, NavDrawer.class);
+                startActivity(signInIntent);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
@@ -80,8 +83,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Intent signInIntent = new Intent(Login.this, NavDrawer.class);
-                        startActivity(signInIntent);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }

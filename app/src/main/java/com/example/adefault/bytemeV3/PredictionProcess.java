@@ -67,8 +67,8 @@ public class PredictionProcess {
 
         @Override
         protected String doInBackground(byte[]... bytes) {
-            String result;
-            double confidence;
+            String result = "";
+            double confidence = 0;
 
             try {
                 PredictionServiceSettings.Builder settingsBuilder = PredictionServiceSettings.newBuilder();

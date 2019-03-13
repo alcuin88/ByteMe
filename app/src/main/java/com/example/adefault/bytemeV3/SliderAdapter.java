@@ -51,7 +51,7 @@ public class SliderAdapter extends PagerAdapter {
                 .into(slideImageView);
         slideHeading.setText(list.get(position).getDescription());
         String steps = "";
-        for(int i = 1; i < list.get(position).getSteps().size(); i++){
+        for(int i = 0; i < list.get(position).getSteps().size(); i++){
             steps += "- " + list.get(position).getSteps().get(i).getDescription() + "\n";
         }
         slideDescription.setText(steps);
