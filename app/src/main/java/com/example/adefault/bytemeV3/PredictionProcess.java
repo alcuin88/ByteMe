@@ -233,6 +233,7 @@ public class PredictionProcess {
                     if(list.get(a).getSigns().size() >= signs.size()){
                         for(int b = 0; b < signs.size(); b++){
                             for(int c = 0; c < list.get(a).getSigns().size(); c++){
+
                                 if(signs.get(b) == list.get(a).getSigns().get(c).getSignsID())
                                     counter++;
                             }

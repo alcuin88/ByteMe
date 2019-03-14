@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".NavDrawer"
+    android:id="@+id/about_layout"
     tools:showIn="@layout/app_bar_nav_drawer">
 
         <LinearLayout
@@ -19,7 +20,7 @@
                     app:srcCompat="@drawable/assassinbug" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/titleTextView"
                     android:layout_width="113dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -29,7 +30,7 @@
                     android:textColor="#ffffff" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/title2TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
                     android:text="A mobile-based first aid guide to insect bite"
@@ -39,7 +40,7 @@
                     android:layout_gravity="center" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/bodyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -53,7 +54,7 @@ your place safe from unwanted pests."
                     android:layout_marginLeft="5dp"/>
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/body2TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -73,6 +74,59 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_marginTop="15dp"/>
 
                 <TextView
+                    android:id="@+id/title3TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Features:"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="left"/>
+
+                <TextView
+                    android:id="@+id/body3TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- Scan bug bite or bug itself"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="left"/>
+
+                <TextView
+                    android:id="@+id/body4TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- View Bugs List"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="left"/>
+
+                <TextView
+                    android:id="@+id/body5TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- View Nearest Pest Control Services"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="left"/>
+
+                <TextView
+                    android:id="@+id/body6TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- Changes the theme color of the app"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="left"/>
+
+                <View
+                    android:layout_width="320dp"
+                    android:layout_height="2dp"
+                    android:background="#e1e1e1"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"/>
+
+                <TextView
+                    android:id="@+id/body7TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Developed by:"
@@ -81,6 +135,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_gravity="center"/>
 
                 <TextView
+                    android:id="@+id/body8TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Alcuin Allan Andrade"
@@ -89,6 +144,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_gravity="center"/>
 
                 <TextView
+                    android:id="@+id/body9TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John Alexis Gacasan"
@@ -97,6 +153,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_gravity="center"/>
 
                 <TextView
+                    android:id="@+id/body10TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rowena P. Rocamora"
@@ -105,6 +162,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_gravity="center"/>
 
                 <TextView
+                    android:id="@+id/body11TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Maybele Collamat"
@@ -112,15 +170,24 @@ the smart phone has been applied in different areas together in medical to easil
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center"/>
 
+                <View
+                    android:layout_width="320dp"
+                    android:layout_height="2dp"
+                    android:background="#e1e1e1"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"/>
+
                 <TextView
+                    android:id="@+id/body12TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You can email us for some other concerns:"
+                    android:text="You can email us for some concerns:"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center" />
 
                 <TextView
+                    android:id="@+id/body13TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="alcuin88@gmail.com"
@@ -130,6 +197,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:textAlignment="center"/>
 
                 <TextView
+                    android:id="@+id/body14TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="johnalexisgacasan@gmail.com"
@@ -139,6 +207,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:textAlignment="center"/>
 
                 <TextView
+                    android:id="@+id/body15TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="rowenaprocamora@gmail.com"
@@ -148,6 +217,7 @@ the smart phone has been applied in different areas together in medical to easil
                     android:textAlignment="center"/>
 
                 <TextView
+                    android:id="@+id/body16TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="maybelemayy@gmail.com"

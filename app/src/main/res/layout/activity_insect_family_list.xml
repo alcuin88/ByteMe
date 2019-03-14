@@ -7,6 +7,7 @@
     android:gravity="top|fill_vertical"
     android:orientation="vertical"
     android:padding="16dp"
+    android:id="@+id/insectfamilylist_layout"
     tools:context=".InsectFamilyList">
     
     <EditText

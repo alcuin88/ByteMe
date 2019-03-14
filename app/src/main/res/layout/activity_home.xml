@@ -1,24 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#262626"
+    android:fillViewport="true"
+    android:id="@+id/home_layout"
     tools:context=".Home">
 
-    <ImageView
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:background="@drawable/logobyteme2"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="A MOBILE-BASED FIRST AID GUIDE TO INSECT BITES"
-        android:textSize="20dp" />
+        android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/homebg"/>
 
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is Bug?"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/bodyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="     A bug is a creature that belongs to the insect order Hemiptera, known commonly as the true bugs.Aphids, cicadas, assassin bugs, ants, and a variety of other insects can claim rightful membership in the order Hemiptera."
+            />
+
+        <TextView
+            android:id="@+id/body2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="     True bugs are defined by the types of mouthparts they possess, which are modified for piercing and sucking. Many members of this order feed on plant fluids, and so their mouths have the structures necessary to penetrate plant tissues. Some Hemipterans, such as aphids, can badly damage or kill plants by feeding in this way. The wings on Hemipterans, the true bugs, fold over one another when at rest; some members lack hind wings althogether. Finally, true bugs always have compound eyes."
+            />
+
+        <View
+            android:layout_width="320dp"
+            android:layout_height="2dp"
+            android:background="#e1e1e1"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/title2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="All Bugs are Insects, but not all"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Insects are Bugs"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/body3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="     By the official definition, a large group of insects are not bugs, although in common usage they are often lumped together under the same label. Beetles, for example, are not true bugs. Beetles are structurally different from the true bugs of the Hemiptera order, in that their mouthparts are designed for chewing, not piercing. And beetles, which belong to the Coleoptera order, have sheath wings that form a hard shell-like protection for the insect, not the membrane-like wings of the true bugs. "
+            />
+
+        <TextView
+            android:id="@+id/body4TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="     Other common insects that do not qualify as bugs include moths, butterflies, and bees. Again, this has to do with structural differences in the body parts of these insects."
+            />
+
+        <TextView
+            android:id="@+id/body5TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="     Finally, there are a number of small crawling creatures that are not insects at all, and so cannot be official bugs. MIllipedes, earthworms, and spiders, for example, do not possess the six legs and body segment structures found in insects, and are instead members of different animal orders—spiders are arachnids, while millipedes are myriapods. They may be creepy, crawly critters, but they are not bugs. "
+            />
+
+        <View
+            android:layout_width="320dp"
+            android:layout_height="2dp"
+            android:background="#e1e1e1"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/title4TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Facts about Bugs"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/body6TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="- A bug is a certain type of insect. Some examples you might be familiar with are the boxelder bug, milkweed bug, assassin bug, and stink bug."
+            />
+
+        <TextView
+            android:id="@+id/body7TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="- True bugs have a stylet (a mouth shaped like a straw) that they use to suck plant juices from plants. The assassin bugs use their stylets to suck blood from other insects."
+            />
+
+        <TextView
+            android:id="@+id/body8TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="- The front wings of true bugs are thickened and colored near where they are attached to the insect's body, and are clearer and thinner towards the hind end of the wing. The hind wings are usually clear and tucked underneath the front wings."
+            />
+
+        <View
+            android:layout_width="320dp"
+            android:layout_height="2dp"
+            android:background="#e1e1e1"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/body9TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© 2018, ThoughtCo. Not Every Bug Is True Bug. All Rights Reserved."
+            />
+
+    </LinearLayout>
+
+</ScrollView>

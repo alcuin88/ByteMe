@@ -20,6 +20,10 @@
             android:id="@+id/nav_pestcontrolservices"
             android:icon="@drawable/ic_place_black_24dp"
             android:title="Pest Control Services" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profileicon"
+            android:title="Profile" />
     </group>
 
     <item android:title="" />

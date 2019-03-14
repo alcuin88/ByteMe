@@ -32,7 +32,7 @@ import java.util.List;
 public class BiteScanInput extends AppCompatActivity {
 
     private static final String TAG = "BiteScanInput";
-    private static final String THRESHOLD = "0.30";
+    private static final String THRESHOLD = "0.90";
 
     private String modelID = "";
     private String projectID;
@@ -221,8 +221,8 @@ public class BiteScanInput extends AppCompatActivity {
                     response.setDescription(value.getDescription());
                     response.setSigns(value.getSigns());
                     response.setSymptoms(value.getSymptoms());
-//                    response.setTreatment(GeoFenceResponse.getTreatment());
-//                    response.setGetRid(GeoFenceResponse.getGetRid());
+                    response.setTreatment(value.getTreatment());
+                    response.setGetRid(value.getGetRid());
 
                     list.add(response);
                 }

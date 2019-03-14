@@ -65,8 +65,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Intent signInIntent = new Intent(Login.this, NavDrawer.class);
-                startActivity(signInIntent);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
@@ -83,6 +81,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        onAuthSuccess(user);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }

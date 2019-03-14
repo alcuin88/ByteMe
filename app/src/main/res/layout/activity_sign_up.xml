@@ -22,7 +22,7 @@
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:hint="User Name"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:textColor="#313b32"
         android:textColorHint="#869299"
         tools:ignore="HardcodedText,RtlSymmetry" />

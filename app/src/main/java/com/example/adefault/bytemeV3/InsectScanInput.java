@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 public class InsectScanInput extends AppCompatActivity {
 
-    private static final String THRESHOLD = "0.70";
+    private static final String THRESHOLD = "0.80";
 
     private String modelID = "";
     private String projectID;

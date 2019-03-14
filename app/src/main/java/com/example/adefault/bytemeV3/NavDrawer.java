@@ -17,14 +17,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adefault.bytemeV3.GeoFence.GeoFenceResponse;
 import com.example.adefault.bytemeV3.GeoFence.GeoFenceProcess;
-import com.example.adefault.bytemeV3.GeoFence.Points;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -78,16 +75,14 @@ public class NavDrawer extends AppCompatActivity
         setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        refIDs();
-        getPoints();
-    }
 
-    private void refIDs(){
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -96,6 +91,8 @@ public class NavDrawer extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         userName = navHeader.findViewById(R.id.userName);
         userEmail = navHeader.findViewById(R.id.userEmail);
+
+        getPoints();
     }
 
     @Override
@@ -157,28 +154,38 @@ public class NavDrawer extends AppCompatActivity
             // Handle the camera action
 
            case R.id.nav_scan:
-               Intent sc = new Intent(NavDrawer.this, ScanModeForm.class);
-               startActivity(sc);
+               Intent a = new Intent(NavDrawer.this, ScanModeForm.class);
+               startActivity(a);
                break;
 
            case R.id.nav_list:
-               Intent l = new Intent(NavDrawer.this, InsectFamilyList.class);
-               startActivity(l);
+               Intent b = new Intent(NavDrawer.this, InsectFamilyList.class);
+               startActivity(b);
                break;
 
            case R.id.nav_pestcontrolservices:
-               Intent p = new Intent(NavDrawer.this, MapsActivity.class);
-               startActivity(p);
+               Intent c = new Intent(NavDrawer.this, MapsActivity.class);
+               startActivity(c);
                break;
 
            case R.id.nav_settings:
-               Intent s = new Intent(NavDrawer.this, Settings.class);
-               startActivity(s);
+               Intent d = new Intent(NavDrawer.this, Settings.class);
+               startActivity(d);
                break;
 
            case R.id.nav_about:
-               Intent a = new Intent(NavDrawer.this, About.class);
-               startActivity(a);
+               Intent e = new Intent(NavDrawer.this, About.class);
+               startActivity(e);
+               break;
+
+           case R.id.nav_profile:
+               Intent f = new Intent(NavDrawer.this, UserProfile.class);
+               startActivity(f);
+               break;
+
+           case R.id.nav_home:
+               Intent g = new Intent(NavDrawer.this, Home.class);
+               startActivity(g);
                break;
         }
 

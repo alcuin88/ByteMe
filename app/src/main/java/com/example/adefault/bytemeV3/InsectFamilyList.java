@@ -1,4 +1,6 @@
 package com.example.adefault.bytemeV3;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 
@@ -74,8 +77,8 @@ public class InsectFamilyList extends AppCompatActivity {
                     response.setDescription(value.getDescription());
                     response.setSigns(value.getSigns());
                     response.setSymptoms(value.getSymptoms());
-//                    response.setTreatment(GeoFenceResponse.getTreatment());
-//                    response.setGetRid(GeoFenceResponse.getGetRid());
+                    response.setTreatment(value.getTreatment());
+                    response.setGetRid(value.getGetRid());
 
                     list.add(response);
                 }
@@ -131,6 +134,20 @@ public class InsectFamilyList extends AppCompatActivity {
         public boolean apply(final BugsListResponseV1 input)
         {
             return pattern.matcher(input.getBugName().toUpperCase()).find();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LinearLayout background = findViewById(R.id.insectfamilylist_layout);
+        SharedPreferences settings = getSharedPreferences("Background", Context.MODE_PRIVATE);
+        if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire)) {
+            background.setBackgroundColor(getResources().getColor(R.color.vampire));
+
+        }
+        else {
+            background.setBackgroundColor(getResources().getColor(R.color.light));
         }
     }
 }

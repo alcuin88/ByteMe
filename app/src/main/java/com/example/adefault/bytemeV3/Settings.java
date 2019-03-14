@@ -26,8 +26,9 @@ public class Settings extends AppCompatActivity {
 
     private List<String> fontStyleSpinnerArray = new ArrayList<>();
     private List<Integer> fontSizeSpinnerArray = new ArrayList<>();
-    private Spinner fontStyleSpinner, fontSizeSpinner;
-    private TextView themeTextView;
+    private Spinner fontStyleSpinner, fontSizeSpinner, fontSize_spinner, fontStyle_spinner;
+    private TextView themeTextView, fontstyleTextView, fontsizeTextView;
+    private RadioButton vampire_radioButton, light_radioButton;
     private String fontStyle;
     private int fontSize;
     private Button save, cancel;
@@ -144,6 +145,12 @@ public class Settings extends AppCompatActivity {
         fontStyleSpinner = findViewById(R.id.fontStyle_spinner);
         fontSizeSpinner = findViewById(R.id.fontSize_spinner);
         themeTextView = findViewById(R.id.themeTextView);
+        vampire_radioButton = findViewById(R.id.vampire_radioButton);
+        light_radioButton = findViewById(R.id.light_radioButton);
+        fontstyleTextView = findViewById(R.id.fontstyleTextView);
+        fontStyle_spinner = findViewById(R.id.fontStyle_spinner);
+        fontsizeTextView = findViewById(R.id.fontsizeTextView);
+        fontSize_spinner = findViewById(R.id.fontSize_spinner);
         save = findViewById(R.id.save);
         cancel = findViewById(R.id.cancel);
         settingsLayout = findViewById(R.id.settings_layout);
@@ -171,12 +178,20 @@ public class Settings extends AppCompatActivity {
         if (settings.getInt("background", getResources().getColor(R.color.light)) == getResources().getColor(R.color.vampire)) {
             background.setBackgroundColor(getResources().getColor(R.color.vampire));
             themeTextView.setTextColor(getResources().getColor(R.color.light));
-            save.setTextColor(getResources().getColor(R.color.light));
+            vampire_radioButton.setTextColor(getResources().getColor(R.color.light));
+            light_radioButton.setTextColor(getResources().getColor(R.color.light));
+            fontstyleTextView.setTextColor(getResources().getColor(R.color.light));
+            fontsizeTextView.setTextColor(getResources().getColor(R.color.light));
+            //fontStyle_spinner.setTextColor(getResources().getColor(R.color.light));
+            //fontSize_spinner.setTextColor(getResources().getColor(R.color.light));
         }
         else {
             background.setBackgroundColor(getResources().getColor(R.color.light));
             themeTextView.setTextColor(getResources().getColor(R.color.vampire));
-            save.setTextColor(getResources().getColor(R.color.vampire));
+            vampire_radioButton.setTextColor(getResources().getColor(R.color.vampire));
+            light_radioButton.setTextColor(getResources().getColor(R.color.vampire));
+            fontstyleTextView.setTextColor(getResources().getColor(R.color.vampire));
+            fontsizeTextView.setTextColor(getResources().getColor(R.color.vampire));
         }
     }
 }
